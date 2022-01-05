@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class Organization extends Model
 {
     use HasFactory;
 
     protected $fillable =[
-        'house_number',
-            'city',
-            'state',
-            'country'
-    ];
+        'organization_name',
+        'organization_phone',
+         'user_id',
+         'address_id',
+        //  'verified_at'
+     ];
 }

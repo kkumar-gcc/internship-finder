@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Models\Address;
 use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
@@ -25,7 +27,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,9 +36,16 @@ class AddressController extends Controller
      * @param  \App\Http\Requests\StoreAddressRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAddressRequest $request)
+    public function store(Request $request)
     {
-        //
+        $address = new Address([
+            'house_number'=>$request['house_number'],
+            'city'=>$request['city'],
+            'state'=>$request['state'],
+            'country'=>$request['country'],
+        ]);
+        $address->save();
+     
     }
 
     /**

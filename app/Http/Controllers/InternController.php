@@ -36,7 +36,18 @@ class InternController extends Controller
      */
     public function store(StoreInternRequest $request)
     {
-        //
+       $intern = new Intern([
+        'first_name'=>$request['first_name'],
+        'last_name'=>$request['last_name'],
+        'other_name'=>$request['other_name'],
+        'user_id'=>$request['user_id'],   
+        'gender'=>$request['gender'],
+        'phone'=>$request['phone'],
+        'date_of_birth'=>$request['date_of_birth'],
+        // 'verified_at'=>$request['verified_at'],
+        'address_id'=>$request['address_id']
+       ]);
+      $intern->save();
     }
 
     /**

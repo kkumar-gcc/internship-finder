@@ -16,11 +16,14 @@ class CreateInternsTable extends Migration
     {
         Schema::create('interns', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('full_name');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('other_name');
             $table->bigInteger('user_id');
             $table->string('gender');
             $table->string('phone');
-            $table->timestamp('verified_at');
+            // $table->timestamp('verified_at');
+            $table->timestamp('date_of_birth');
             $table->bigInteger('address_id');
             $table->timestamps();
         });
