@@ -1,0 +1,149 @@
+:root {
+    --myFont: novo sans;
+    --myFonty: poppins;
+    --myColor: #6c63ff;
+}
+
+*,
+* ::before,
+* ::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    /* border: 1px solid red; */
+}
+html {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+        url(./bg-image.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* heading */
+
+.logo h1 {
+    color: rgb(240, 240, 240);
+    font-style: italic;
+    font-size: 14px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+span {
+    color: var(--myColor);
+}
+h2 {
+    text-align: center;
+    font-family: var(--myFont);
+    text-transform: capitalize;
+    font-size: 3rem;
+    color: var(--myColor);
+}
+
+/* Global */
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10% auto;
+}
+.child-container {
+    width: 30%;
+    position: relative;
+    right: 15rem;
+    display: none;
+    transform-origin: top;
+    animation: animate 0.5s;
+    animation-timing-function: ease-in-out;
+}
+.child-active {
+    display: block;
+}
+.radio-container {
+    color: rgb(168, 163, 163);
+    font-family: var(--myFont);
+    font-size: 14px;
+}
+.radio-container input {
+    margin: 15px 10px;
+}
+
+.child-container #name {
+    width: 100%;
+    padding: 20px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    font-family: var(--myFont);
+}
+::placeholder {
+    font-family: var(--myFont);
+}
+.illustrator-container img {
+    width: 60%;
+    height: auto;
+}
+
+@keyframes animate {
+    from {
+        right: 0;
+        /* transform: scale(1, 0);
+        opacity: 0; */
+    }
+    to {
+        right: 1;
+        /* transform: scale(1, 1);
+        opacity: 1; */
+    }
+}
+
+/* Buttons */
+
+.logs {
+    position: relative;
+    left: 80em;
+    top: -48px;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid var(--myColor);
+    font-size: 1em;
+    color: #f3f3f3;
+    letter-spacing: 1px;
+}
+.logs:hover {
+    border: 1px solid #f3f3f3;
+}
+.btn {
+    margin-top: 3rem;
+    padding: 0.75rem;
+    display: block;
+    text-decoration: none;
+    background-color: var(--myColor);
+    color: #f3f3f3;
+    text-align: center;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    box-shadow: 0 0 0 2px rgb(70, 70, 70), 0 0 0 3px var(--myColor);
+}
+.btn-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+.btn1 {
+    border: 0;
+    font-size: 1.08em;
+}

@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\AddressController;
-use App\Http\Controllers\InternController;
+
 use App\Http\Controllers\OrganizationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/address', [AddressController::class ,'store']);
+// Route::post('/address', [AddressController::class ,'store']);
 Route::post('/organization',[OrganizationController::class,'store']);
-Route::post('/intern',[InternController::class,'store']);
+Route::post('/intern',[App\Http\Controllers\InternController::class,'store']);
+Route::post('/intern/edit{id}',[App\Http\Controllers\InternController::class,'editIntern']);
