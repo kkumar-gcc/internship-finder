@@ -23,6 +23,7 @@ class CreateInternsTable extends Migration
             $table->string('gender');
             $table->string('phone');
             $table->timestamp('date_of_birth');
+            $table->string('area_of_interest');
             $table->timestamps();
         });
     }
