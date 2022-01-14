@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\RegistrationTypeEnum;
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+
 
     /**
      * Create a new controller instance.
@@ -49,7 +49,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-
         return Validator::make($data, [
             'image' => 'nullable|file|image|mimes:jpeg,png,jpg|max:5000',
             'userType' => ['required', 'string', 'max:255'],
@@ -70,12 +69,24 @@ class RegisterController extends Controller
         $userPhoto = "noimage.png";
         $userPhoto = date('mdYHis') . uniqid() . '.' . $data['photo']->extension();
         $data['photo']->move(public_path('ProfilePhoto'), $userPhoto);
-        return User::create([
+        $user = User::create([
             'user_type' => $data['userType'],
             'name' => $data['name'],
             'email' => $data['email'],
             'profile_image' => $userPhoto,
             'password' => Hash::make($data['password']),
         ]);
+
+        if ($user->user_type == "Intern") {
+            $this->redirectTo = "/intern-dashboard";
+        }
+        if ($user->user_type == "Organisation") {
+            $this->redirectTo = "/organisation-dashboard";
+        }
+        if ($user->user_type == "Others") {
+            $this->redirectTo = "/";
+        }
+
+        return $user;
     }
 }

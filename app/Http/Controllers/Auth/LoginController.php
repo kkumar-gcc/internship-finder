@@ -26,7 +26,15 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    public function redirectTo()
+    {
+
+        $userType = auth()->user()->user_type;
+        if ($userType == "Intern") {
+            return '/intern-dashboard';
+        }
+        return '/organisation-dashboard';
+    }
 
     /**
      * Create a new controller instance.

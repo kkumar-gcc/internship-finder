@@ -24,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/organization',[OrganizationController::class,'store']);
 Route::post('/intern',[App\Http\Controllers\InternController::class,'store']);
 Route::post('/intern/edit{id}',[App\Http\Controllers\InternController::class,'editIntern']);
+
+
