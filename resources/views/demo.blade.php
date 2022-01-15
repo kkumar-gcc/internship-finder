@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <form action="{{ url('/search') }}" method="GET" id="form_search">
-            <input class="typeahead form-control" name="query" type="text" data-provide="typeahead" id="typeahead">
+            <input class="typeahead form-control" name="query" type="text" data-provide="typeahead" id="typeahead" autocomplete="off">
         </form>
     </div>
 
@@ -25,7 +25,7 @@
             },
             displayText: function(item) {
                 return '<div class="bg-light"><h2>' + item.first_name + ' ' + item.other_name + '</h2>  <p>' +
-                    item.area_of_interest + '</p> </div>';
+                    item.area_of_interest + '</p>  </div>';
             },
             highlighter: function(item) {
                 return ('<div class="p-4 rounded m-4">' + item + '</div>');
