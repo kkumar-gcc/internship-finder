@@ -1,6 +1,9 @@
 <?php
 
+<<<<<<< Updated upstream
 use App\Http\Controllers\AddressController;
+=======
+>>>>>>> Stashed changes
 use App\Http\Controllers\InternController;
 use App\Http\Controllers\OrganizationController;
 use Illuminate\Http\Request;
@@ -23,4 +26,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/address', [AddressController::class ,'store']);
 Route::post('/organization',[OrganizationController::class,'store']);
+<<<<<<< Updated upstream
 Route::post('/intern',[InternController::class,'store']);
+=======
+Route::post('/intern',[App\Http\Controllers\InternController::class,'store']);
+Route::post('/intern/edit{id}',[App\Http\Controllers\InternController::class,'editIntern']);
+Route::get('/search',[InternController::class,'searchIntern']);
+>>>>>>> Stashed changes
