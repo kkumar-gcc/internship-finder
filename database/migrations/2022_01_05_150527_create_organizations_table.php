@@ -15,10 +15,10 @@ class CreateOrganizationsTable extends Migration
     {
         Schema::create('organizations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('organization_name');
-            $table->string('organization_phone');
             $table->bigInteger('user_id');
             $table->bigInteger('address_id');
+            $table->string('organization_name');
+            $table->string('organization_phone'); 
             // $table->timestamp('verified_at');
             $table->timestamps();
         });
