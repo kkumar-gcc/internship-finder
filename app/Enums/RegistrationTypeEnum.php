@@ -2,15 +2,16 @@
 
 namespace App\Enums;
 
-use Illuminate\Validation\Rules\Enum;
+use BenSampo\Enum\Enum;
 
 /**
  * @method static static OptionOne()
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-
-final class RegistrationTypeEnum extends Enum{
-const Intern = 'Intern';
-const Organisation = "Organisation";
+final class RegistrationTypeEnum extends Enum
+{
+    const Organisation = "Organisation";
+    const Intern = "Intern";
+    const Other = "Other";
 }

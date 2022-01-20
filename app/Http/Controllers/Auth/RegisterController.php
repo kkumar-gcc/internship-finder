@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Enums\RegistrationTypeEnum;
+use App\Enums\registrationTypeEnum as EnumsRegistrationTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -64,6 +65,17 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
+    public function showRegistrationForm()
+    {
+        $registration_types = RegistrationTypeEnum::toSelectArray();
+
+        return view('auth\register')
+            ->with([
+                'registration_types' => $registration_types
+            ]);
+    }
+
     protected function create(array $data)
     {
         $userPhoto = "noimage.png";
@@ -77,13 +89,13 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        if ($user->user_type == "Intern") {
+        if ($user->user_type == RegistrationTypeEnum::Intern) {
             $this->redirectTo = "/intern-dashboard";
         }
-        if ($user->user_type == "Organisation") {
+        if ($user->user_type == RegistrationTypeEnum::Organisation) {
             $this->redirectTo = "/organisation-dashboard";
         }
-        if ($user->user_type == "Others") {
+        if ($user->user_type == RegistrationTypeEnum::Other) {
             $this->redirectTo = "/";
         }
 

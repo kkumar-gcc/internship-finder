@@ -44,14 +44,14 @@
                     @if(!auth()->user()->intern_id)
                     <a href="/create" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Profile</span></a>
                     @else
-                    <a href="/create" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Profile</span></a>
+                    <a href="" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Profile</span></a>
                     @endif
                     <ul>
                         <li>
-                            @if(!auth()->user()->agent_id)
+                            @if(!auth()->user()->intern)
                             <a href="/create"><i class="far fa-user"> </i> Create Profile</a>
                             @else
-                            <a href="/create"><i class="far fa-user"> </i> Edit Profile</a>
+                            <a href=""><i class="far fa-user"> </i> Edit Profile</a>
                             @endif
                         </li>
                     </ul>

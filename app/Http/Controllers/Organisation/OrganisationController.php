@@ -11,4 +11,8 @@ class OrganisationController extends Controller
     {
        return view('/OrganisationDashboard.home');
     }
+
+    public function create(){
+     return view('/OrganisationDashboard/Staff.create');
+    }
 }

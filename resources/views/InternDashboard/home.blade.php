@@ -1,8 +1,12 @@
 @extends('layouts.internDashboard')
 
 @section('content')
-
-<div class="content">
+@if (session('status'))
+<div class="alert alert-success">
+  <button type="button" class="close" data-dismiss="alert" style="color: green;">X</button>
+  {{ session('status') }}
+</div>
+@endif<div class="content">
   <div class="row invisible" data-toggle="appear">
     <div class="col-md-4">
       <a class="block block-rounded block-bordered block-link-shadow" href="javascript:void(0)">

@@ -25,9 +25,9 @@
             </div>
 
             <div class="child-container radio-container child-active">
-                <input type="radio" name="userType" value="Organisation" checked> Organisation <br>
-                <input type="radio" name="userType" value="Intern"> Intern <br>
-                <input type="radio" name="userType" value="Others"> Others
+                @foreach($registration_types as $key=> $value)
+                <input type="radio" name="userType" value="{{$value}}" checked>{{$value}}<br>
+                @endforeach
                 <div class=" ">
                     <a href="#" class="btn btn-next  width-50 ml-auto">Next</a>
                 </div>

@@ -42,9 +42,9 @@
                 <li class="nav-main-heading"><span class="sidebar-mini-visible">MG</span><span class="sidebar-mini-hidden">Manage</span></li>
                 <li>
                     @if(!auth()->user()->intern_id)
-                    <a href="/create" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"></i><span class="sidebar-mini-hide">Staff</span></a>
+                    <a href="/create-staff" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"></i><span class="sidebar-mini-hide">Staff</span></a>
                     @else
-                    <a href="/create" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"></i><span class="sidebar-mini-hide">Staff</span></a>
+                    <a href="/create-staff" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"></i><span class="sidebar-mini-hide">Staff</span></a>
                     @endif
                     <ul>
                         <li>

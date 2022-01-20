@@ -20,6 +20,7 @@ class InternCommand
             'gender' => ['required'],
             'phone' => ['required'],
             'date_of_birth' => ['required'],
+            'area_of_interest' => ['required'],
             'house_number' => ['required'],
             'city' => ['required'],
             'state' => ['required'],
@@ -47,6 +48,7 @@ class InternCommand
             'gender' => ['required'],
             'phone' => ['required'],
             'date_of_birth' => ['required'],
+            'area_of_interest' => ['required'],
             'house_number' => ['required'],
             'city' => ['required'],
             'state' => ['required'],
@@ -74,6 +76,7 @@ class InternCommand
         $intern->gender = $formData['gender'];
         $intern->phone = $formData['phone'];
         $intern->date_of_birth = $formData['date_of_birth'];
+        $intern->area_of_interest = $formData['area_of_interest'];
         $intern->save();
 
         //save and intern address
@@ -84,13 +87,8 @@ class InternCommand
         $address->country = $formData['country'];
         $address->save();
 
-
-
-        $addressId = $address->id;
-
         //update intern address
-        $intern = Intern::find($loggedInUserId);
-        $intern->address = $addressId;
+        $intern->address_id = $address->id;
         $intern->save();
     }
 }
