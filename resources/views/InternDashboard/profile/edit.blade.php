@@ -12,8 +12,9 @@
 	</div>
 	<div class="block block-rounded block-fx-shadow">
 		<div class="block-content">
-			<form action="/intern/edit{{$intern->id}}" method="post" enctype="multipart/form-data">
+			<form action="/intern/update{{$intern->id}}" method="post">
 				@csrf
+				@method('PUT')
 				<h2 class="content-heading text-black">Vital Info</h2>
 
 				@if(session('success'))

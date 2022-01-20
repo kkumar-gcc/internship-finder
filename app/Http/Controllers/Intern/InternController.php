@@ -38,7 +38,7 @@ class InternController extends Controller
     }
 
     public function editIntern($id)
-    {dd("here");
+{
         $intern = Intern::find($id);
         $gender = GenderEnum::toSelectArray();
         $country = CountryEnum::toSelectArray();

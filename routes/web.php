@@ -27,6 +27,7 @@ Route::get('/intern-dashboard',[App\Http\Controllers\Intern\InternController::cl
 Route::get('/create',[App\Http\Controllers\Intern\InternController::class,'create']);
 Route::post('/intern',[App\Http\Controllers\Intern\InternController::class,'store']);
 Route::get('/intern/edit{id}',[App\Http\Controllers\Intern\InternController::class,'editIntern']);
+Route::put('/intern/update{id}',[App\Http\Controllers\Intern\InternController::class,'updateIntern']);
 
 //organisation
 Route::get('/organisation-dashboard',[App\Http\Controllers\Organisation\OrganisationController::class,'index']);

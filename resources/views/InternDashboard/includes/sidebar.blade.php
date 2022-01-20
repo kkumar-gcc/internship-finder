@@ -51,7 +51,7 @@
                             @if(!auth()->user()->intern)
                             <a href="/create"><i class="far fa-user"> </i> Create Profile</a>
                             @else
-                            <a href=""><i class="far fa-user"> </i> Edit Profile</a>
+                            <a href="/intern/edit{{auth()->user()->intern->id}}"><i class="far fa-user"> </i> Edit Profile</a>
                             @endif
                         </li>
                     </ul>
