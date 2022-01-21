@@ -27,6 +27,7 @@ class InternController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $formData = $request->all();
         try {
             $intern =  (new InternCommand())->newIntern($formData);
@@ -38,7 +39,7 @@ class InternController extends Controller
     }
 
     public function editIntern($id)
-{
+    {
         $intern = Intern::find($id);
         $gender = GenderEnum::toSelectArray();
         $country = CountryEnum::toSelectArray();

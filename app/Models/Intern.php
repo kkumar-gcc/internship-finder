@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Intern extends Model
 {
     use HasFactory;
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo(user::class);
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(organization::class);
     }
 }

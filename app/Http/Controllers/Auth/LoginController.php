@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\RegistrationTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -30,10 +31,15 @@ class LoginController extends Controller
     {
 
         $userType = auth()->user()->user_type;
-        if ($userType == "Intern") {
+        if ($userType == RegistrationTypeEnum::Intern) {
             return '/intern-dashboard';
         }
-        return '/organisation-dashboard';
+        if ($userType == RegistrationTypeEnum::Organisation) {
+            return '/organisation-dashboard';
+        }
+        if ($userType == RegistrationTypeEnum::Staff) {
+            return "/";
+        }
     }
 
     /**

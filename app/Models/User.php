@@ -44,7 +44,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function intern(){
+    public function intern()
+    {
         return $this->hasOne(Intern::class);
+    }
+    public function organization()
+    {
+        return $this->hasOne(Organization::class);
     }
 }

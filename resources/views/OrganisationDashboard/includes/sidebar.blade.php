@@ -49,9 +49,9 @@
                     <ul>
                         <li>
                             @if(!auth()->user()->agent_id)
-                            <a href="/create"><i class="far fa-user"></i>Create Staff</a>
+                            <a href="/create-staff"><i class="far fa-user"></i>Create Staff</a>
                             @else
-                            <a href="/create"><i class="far fa-user"></i>Edit Staff</a>
+                            <a href="/create-staff"><i class="far fa-user"></i>Edit Staff</a>
                             @endif
                         </li>
                     </ul>
