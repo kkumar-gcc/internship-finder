@@ -14,7 +14,7 @@
             <div class="col-md-3 ftco-animate">
                 <div class="agent">
                     <div class="img">
-                        <img src="{{asset ('ProfilePhoto')}}/{{$intern->user->profile_image}}" style="width: 50%; height:200px; border-radius: 30%;" class="img-fluid" alt="Colorlib Template">
+                        <img src="{{asset ('ProfilePhoto')}}/{{$intern->user->profile_image}}" style="width: 180px; height:200px;" class="img-fluid" alt="Colorlib Template">
                         <div class="desc">
                             <h3><a href="properties.html">{{$intern->area_of_interest}}</a></h3>
                             <p class="h-info"><span class="location">{{$intern->user->email}}</span> <span class="details">Schedule Appoinment</span></p>
