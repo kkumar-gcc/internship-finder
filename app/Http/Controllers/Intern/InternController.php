@@ -13,21 +13,27 @@ class InternController extends Controller
 {
     public function index()
     {
-        return view('/InternDashboard.home');
+        if (Auth()->check()) {
+            return view('/InternDashboard.home');
+        }
+        return redirect('/login');
     }
 
     public function create()
     {
-        $gender = GenderEnum::toSelectArray();
-        $country = CountryEnum::toSelectArray();
-        return view('/InternDashboard/profile.create')
-            ->with('gender', $gender)
-            ->with('country', $country);
+        if (Auth()->check()) {
+            $gender = GenderEnum::toSelectArray();
+            $country = CountryEnum::toSelectArray();
+            return view('/InternDashboard/profile.create')
+                ->with('gender', $gender)
+                ->with('country', $country);
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function store(Request $request)
     {
-        dd($request->all());
         $formData = $request->all();
         try {
             $intern =  (new InternCommand())->newIntern($formData);

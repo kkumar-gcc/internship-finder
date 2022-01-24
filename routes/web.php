@@ -43,7 +43,10 @@ Route::put('/intern/update{id}',[App\Http\Controllers\Intern\InternController::c
 //organisation
 Route::get('/organisation-dashboard',[App\Http\Controllers\Organisation\OrganisationController::class,'index']);
 Route::get('/create-staff',[App\Http\Controllers\Organisation\OrganisationController::class,'create']);
-Route::get('/intern-dashboard', [App\Http\Controllers\Intern\InternController::class, 'index']);
+Route::get('/interns',[App\Http\Controllers\Organisation\OrganisationController::class,'interns']);
+
+
+
 Route::get('/create', [App\Http\Controllers\Intern\InternController::class, 'create']);
 
 Route::get('/organisation-dashboard', [App\Http\Controllers\Organisation\OrganisationController::class, 'index']);
@@ -57,3 +60,5 @@ Route::put('/reset-password/{token}',[App\Http\Controllers\ResetPasswordControll
 Route::get('/reset-password/{token}',[App\Http\Controllers\ResetPasswordController::class,'resetForm'])->name('password.update');
 
 Route::resource('staff', Staff\StaffController::class);
+
+

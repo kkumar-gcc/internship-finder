@@ -14,10 +14,7 @@ class StaffFactory extends Factory
     public function definition()
     {
         return [
-            'email'=> $this->faker->email(),
-            'first_name'=>$this->faker->firstName(),
-            'last_name'=>$this->faker->lastName(),
-            'company_status'=>$this->faker->boolean()
+            
         ];
     }
 }

@@ -14,6 +14,5 @@ class StaffSeeder extends Seeder
      */
     public function run()
     {
-        Staff::factory()->count(100)->create();
     }
 }

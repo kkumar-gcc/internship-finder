@@ -95,10 +95,6 @@ class RegisterController extends Controller
         if ($user->user_type == RegistrationTypeEnum::Organisation) {
             $this->redirectTo = "/organisation-dashboard";
         }
-        if ($user->user_type == RegistrationTypeEnum::Staff) {
-            $this->redirectTo = "/";
-        }
-
         return $user;
     }
 }

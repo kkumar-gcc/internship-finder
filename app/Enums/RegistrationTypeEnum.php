@@ -13,5 +13,4 @@ final class RegistrationTypeEnum extends Enum
 {
     const Organisation = "Organisation";
     const Intern = "Intern";
-    const Staff = "Staff";
 }

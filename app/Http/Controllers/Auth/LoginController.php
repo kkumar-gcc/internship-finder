@@ -37,9 +37,10 @@ class LoginController extends Controller
         if ($userType == RegistrationTypeEnum::Organisation) {
             return '/organisation-dashboard';
         }
-        if ($userType == RegistrationTypeEnum::Staff) {
-            return "/";
+        if (auth()->user()->user_type == "Staff") {
+            return '/organisation-dashboard';
         }
+        
     }
 
     /**

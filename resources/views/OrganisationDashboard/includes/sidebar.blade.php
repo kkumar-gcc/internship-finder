@@ -48,25 +48,25 @@
                     @endif
                     <ul>
                         <li>
-                            @if(!auth()->user()->agent_id)
-                            <a href="/create-staff"><i class="far fa-user"></i>Create Staff</a>
+                            @if(auth()->user()->user_type == "Staff")
+                            <a href="/create-staff"><i class="far fa-user"></i>Profile</a>
                             @else
-                            <a href="/create-staff"><i class="far fa-user"></i>Edit Staff</a>
+                            <a href="#"><i class="far fa-user"></i>Create Staff</a>
                             @endif
                         </li>
                     </ul>
                 </li>
-                <!-- <li>
-                    <a class="nav-submenu" data-toggle="nav-submenu" href=""><i class="fa fa-building"></i><span class="sidebar-mini-hide">Lorem Ipsum</span></a>
+                <li>
+                    <a class="nav-submenu" data-toggle="nav-submenu" href=""><i class="fa fa-building"></i><span class="sidebar-mini-hide">Interns</span></a>
                     <ul>
                         <li>
-                            <a href="">Lorem Ipsum</a>
+                            <a href="/interns">Find Intern</a>
                         </li>
                         <li>
-                            <a href="">Lorem Ipsum</a>
+                            <a href="">Selected Interns</a>
                         </li>
                     </ul>
-                </li> -->
+                </li>
 
                 <li class="nav-main-heading"><span class="sidebar-mini-visible">ST</span><span class="sidebar-mini-hidden">Contact Us</span></li>
                 <li>

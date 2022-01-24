@@ -42,6 +42,6 @@ class ResetPasswordController extends Controller
         //delete password reset row.
         DB::table('password_resets')
             ->where('token', $token)->delete();
-        return redirect('/');
+        return redirect('/login');
     }
 }
