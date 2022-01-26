@@ -9,16 +9,13 @@ class Intern extends Model
 {
     use HasFactory;
 
-    protected $fillable =[
-        'full_name',
-        'last_name',
-        'other_name',
-        'user_id',
-        'gender',
-        'phone',
-        'date_of_birth',
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
 
-        // 'verified_at',
-        'address_id'
-    ];
+    public function organization()
+    {
+        return $this->belongsTo(organization::class);
+    }
 }

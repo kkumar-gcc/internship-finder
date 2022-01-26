@@ -1,0 +1,179 @@
+:root {
+    --myFont: novo sans;
+    --myFonty: poppins;
+    --myColor: #6C63FF;
+    --textColor: #e4e3fa;
+    --bgColor: #242333;
+}
+
+*,
+* ::before,
+* ::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    /* border: 1px solid red; */
+}
+
+html {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.body-container {
+    /* margin-top: 10px; */
+    padding: 10px;
+    background: var(--bgColor);
+}
+
+span {
+    color: var(--myColor);
+}
+
+.header {
+    width: 60%;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+}
+
+.header h2 {
+    font-family: var(--myFont);
+    font-size: 3rem;
+    color: var(--myColor);
+}
+
+/* Global */
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    margin: 10% auto;
+}
+
+.form-container {
+    flex: 50%;
+    margin: 10px;
+    padding: 10px;
+}
+
+.illustrator-container {
+    flex: 50%;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+.illustrator-container img {
+    width: 80%;
+    height: 80%;
+}
+
+.child-container {
+
+    display: none;
+    transform-origin: top;
+    animation: animate 0.5s;
+    animation-timing-function: ease-in-out;
+}
+
+.child-active {
+    display: block;
+}
+
+.radio-container {
+    color: rgb(168, 163, 163);
+    font-family: var(--myFont);
+    font-size: 14px;
+}
+
+.child-container input:not(input[type="radio"]) {
+    width: 100%;
+    padding: 20px 19px;
+    margin: 5px auto;
+    border: 0;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    font-family: var(--myFont);
+}
+
+::placeholder {
+    font-family: var(--myFont);
+}
+
+input[type="radio"] {
+    display: inline-block;
+    width: 10%;
+}
+
+@keyframes animate {
+    from {
+        right: 0;
+        /* transform: scale(1, 0);
+        opacity: 0; */
+    }
+
+    to {
+        right: 1;
+        /* transform: scale(1, 1);
+        opacity: 1; */
+    }
+}
+
+
+.btn {
+    margin-top: 3rem;
+    padding: 0.75rem;
+    display: block;
+    text-decoration: none;
+    background-color: var(--myColor);
+    color: #f3f3f3;
+    text-align: center;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    box-shadow: 0 0 0 2px rgb(70, 70, 70), 0 0 0 3px var(--myColor);
+}
+
+.btn-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.btn1 {
+    border: 0;
+    font-size: 1.08em;
+}
+
+@media only screen and (max-width: 650px) {
+
+    .container {
+
+        flex-direction: column;
+    }
+
+    .form-container {
+        flex: 100%;
+
+    }
+
+    .illustrator-container {
+        flex: 100%;
+
+    }
+
+    .header h2 {
+        font-size: 2rem;
+
+    }
+}

@@ -1,77 +1,73 @@
 @extends('layouts.app')
-
+@section('styleLink')
+    <link rel="stylesheet" href="{{ asset('css/myStyle.css') }}">
+@endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+    <div class="body-container">
+        <div class="header">
+            <h2>Registration Form</h2>
+        </div>
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="container">
+                <div class="illustrator-container">
+                    <img src="./illustration2.svg" alt="notify">
+                </div>
+                <div class="form-container">
+                    <div class="child-container radio-container  child-active">
+                        @foreach ($registration_types as $key => $value)
+                            <input type="radio" name="userType" value="{{ $value }}"
+                                checked>{{ $value }}<br>
+                        @endforeach
+                        <div class=" ">
+                            <a href="#" class="btn btn-next  width-50 ml-auto logs">Next</a>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                    </div>
+                    <div class="child-container">
+                        <form action="#" method="POST" class="form">
+                            <input type="text" placeholder="Full Name" id="name" name="name" required>
+                            <div class="btn-group ">
+                                <a href="#" class="btn btn-prev logs">Previous</a>
+                                <a href="#" class="btn btn-next logs">Next</a>
                             </div>
+                        </form>
+                    </div>
+                    <div class="child-container">
+                        <input type="email" placeholder="Email" id="email" name="email" required>
+                        <div class="btn-group ">
+                            <a href="#" class="btn btn-prev logs">Previous</a>
+                            <a href="#" class="btn btn-next logs">Next</a>
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                    <div class="child-container">
+                        <input type="file" class="custom-file-input" name="photo" data-toggle="custom-file-input">
+                        <div class="btn-group ">
+                            <a href="#" class="btn btn-prev logs">Previous</a>
+                            <a href="#" class="btn btn-next logs">Next</a>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                    </div>
+                    <div class="child-container">
+                        <input type="password" placeholder="Password" id="name" required name="password">
+                        <input type="password" placeholder="Confirm Password" name="password_confirmation" id="name">
+                        <div class="btn-group ">
+                            <a class="btn btn-prev logs">Previous</a>
+                            <button type="submit" class="btn btn1 logs">
+                                {{ __('Register') }}
+                            </button>
                         </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-</div>
 @endsection
+@section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ asset('/js/myScript.js') }}"></script>
+@endsection
+   
+
+    

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\RegistrationTypeEnum;
+use App\Enums\registrationTypeEnum as EnumsRegistrationTypeEnum;
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+
 
     /**
      * Create a new controller instance.
@@ -50,6 +51,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'image' => 'nullable|file|image|mimes:jpeg,png,jpg|max:5000',
+            'userType' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -62,12 +65,36 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
+    public function showRegistrationForm()
+    {
+        $registration_types = RegistrationTypeEnum::toSelectArray();
+
+        return view('auth\register')
+            ->with([
+                'registration_types' => $registration_types
+            ]);
+    }
+
     protected function create(array $data)
     {
-        return User::create([
+        $userPhoto = "noimage.png";
+        $userPhoto = date('mdYHis') . uniqid() . '.' . $data['photo']->extension();
+        $data['photo']->move(public_path('ProfilePhoto'), $userPhoto);
+        $user = User::create([
+            'user_type' => $data['userType'],
             'name' => $data['name'],
             'email' => $data['email'],
+            'profile_image' => $userPhoto,
             'password' => Hash::make($data['password']),
         ]);
+
+        if ($user->user_type == RegistrationTypeEnum::Intern) {
+            $this->redirectTo = "/intern-dashboard";
+        }
+        if ($user->user_type == RegistrationTypeEnum::Organisation) {
+            $this->redirectTo = "/organisation-dashboard";
+        }
+        return $user;
     }
 }

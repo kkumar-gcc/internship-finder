@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\RegistrationTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -26,7 +27,21 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    public function redirectTo()
+    {
+
+        $userType = auth()->user()->user_type;
+        if ($userType == RegistrationTypeEnum::Intern) {
+            return '/intern-dashboard';
+        }
+        if ($userType == RegistrationTypeEnum::Organisation) {
+            return '/organisation-dashboard';
+        }
+        if (auth()->user()->user_type == "Staff") {
+            return '/organisation-dashboard';
+        }
+        
+    }
 
     /**
      * Create a new controller instance.

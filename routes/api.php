@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AddressController;
-use App\Http\Controllers\InternController;
+
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/address', [AddressController::class ,'store']);
-Route::post('/organization',[OrganizationController::class,'store']);
-Route::post('/intern',[InternController::class,'store']);
+// Route::post('/address', [AddressController::class ,'store']);
+
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
+
+Route::post('/intern', [App\Http\Controllers\InternController::class, 'store']);
+
+// Route::post('/staff',[StaffController::class,'index']);
+Route::resource('staff', StaffController::class);

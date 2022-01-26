@@ -14,7 +14,10 @@ class AddressFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'house_number' => $this->faker->numberBetween(0, 200),
+            'city' => $this->faker->city(),
+            'state' => $this->faker->realText(30),
+            'country' => $this->faker->country(),
         ];
     }
 }
