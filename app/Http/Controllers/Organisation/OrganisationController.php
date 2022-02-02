@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Organisation;
 
 use App\Http\Controllers\Controller;
 use App\Models\Intern;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrganisationController extends Controller
@@ -15,7 +16,11 @@ class OrganisationController extends Controller
         }
         return redirect('/login');
     }
-
+    
+    public function profile()
+    {
+        return view('/OrganisationDashboard.profile');
+    }
     public function create()
     {
         if (Auth()->check()) {

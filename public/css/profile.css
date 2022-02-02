@@ -1,0 +1,106 @@
+.profile-container {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.top-container {
+  min-height: 100px;
+  padding: 10px;
+  margin: 10px;
+  background: #2D3541;
+  border-radius: 5px;
+}
+
+.bottom-container {
+  display: flex;
+  flex-direction: row;
+
+  margin: 10px;
+}
+
+.bottom-left-container {
+  flex: 30%;
+  background: white;
+}
+
+.bottom-right-container {
+  flex: 65%;
+  margin-left: 10px;
+
+  background: white;
+}
+
+.container-header {
+  color: #2D3541;
+  position: relative;
+  box-shadow: none;
+  padding: 20px;
+}
+
+.container-header .header-dropdown {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  list-style: none;
+}
+
+.container-header .header-dropdown li {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+
+.container-body {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-weight: 400;
+  color: #494b52;
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.col-xl-9 {
+  -ms-flex: 0 0 75%;
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+
+
+.profile-header {
+  border-radius: .1875rem;
+  background: #2D3541;
+  color: #fff;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-header img {
+  width: 70px;
+}
+.profile-header h5{
+  color: white;
+}
+.rounded {
+  border-radius: .25rem !important;
+}
+
+@media only screen and (max-width: 700px) {
+  .bottom-container {
+    flex-direction: column;
+  }
+  .bottom-left-container {
+    flex: 100%;
+    background: white;
+  }
+  
+  .bottom-right-container {
+    flex: 100%;
+    margin: 10px 0px;
+  
+   
+  }
+}

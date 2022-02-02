@@ -70,7 +70,7 @@ class RegisterController extends Controller
     {
         $registration_types = RegistrationTypeEnum::toSelectArray();
 
-        return view('auth\register')
+        return view('auth.register')
             ->with([
                 'registration_types' => $registration_types
             ]);

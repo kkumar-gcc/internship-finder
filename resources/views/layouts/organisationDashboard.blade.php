@@ -35,7 +35,9 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-16158021-6"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-
+  <main>
+      @yield('styleLink')
+  </main>
 </head>
 
 <body>
@@ -78,7 +80,9 @@
     </div>
     <script src="{{ asset('/js/codebase.core.min-4.3.js') }}"></script>
     <script src="{{ asset('/js/codebase.app.min-4.3.js') }}"></script>
-
+     <main>
+         @yield('scriptLink')
+     </main>
     <script type="text/javascript">
         var path = "{{ url('demo/search') }}";
         $('input.typeahead').typeahead({

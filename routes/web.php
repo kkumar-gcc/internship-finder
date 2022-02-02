@@ -66,4 +66,5 @@ Route::get('/search',[App\Http\Controllers\Organisation\OrganisationController::
 
 Route::get('/demo/search',[App\Http\Controllers\Organisation\OrganisationController::class,'findIntern'])->name('demo/search');
 
+Route::get('/profile',[App\Http\Controllers\Organisation\OrganisationController::class,'profile']);
 
