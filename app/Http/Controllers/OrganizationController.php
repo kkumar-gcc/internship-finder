@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use App\Http\Requests\StoreOrganizationRequest;
 use App\Http\Requests\UpdateOrganizationRequest;
+use App\Models\Internship;
 
 class OrganizationController extends Controller
 {
@@ -27,7 +28,7 @@ class OrganizationController extends Controller
     {
         //
     }
-
+ 
     /**
      * Store a newly created resource in storage.
      *

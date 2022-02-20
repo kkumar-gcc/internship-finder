@@ -24,11 +24,15 @@ class Organization extends Model
 
     public function user()
     {
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(User::class);
     }
 
     public function intern()
     {
-        return $this->hasMany(intern::class);
+        return $this->hasMany(Intern::class);
+    }
+    public function internships()
+    {
+        return $this->hasMany(Internship::class);
     }
 }

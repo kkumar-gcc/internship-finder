@@ -56,6 +56,24 @@
                         </li>
                     </ul>
                 </li>
+                 <li>
+                    @if(!auth()->user()->intern_id)
+                    <a href="/organizations" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Organizations</span></a>
+                    @else
+                    <a href="" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">POrganizations</span></a>
+                    @endif
+                    <ul>
+                        <li>
+                         <a href="/organizations"><i class="far fa-user"> </i> search organization</a>
+                           
+                            {{-- @if(!auth()->user()->intern)
+                            <a href="/create"><i class="far fa-user"> </i> Create Profile</a>
+                            @else
+                            <a href="/intern/edit{{auth()->user()->intern->id}}"><i class="far fa-user"> </i> Edit Profile</a>
+                            @endif --}}
+                        </li>
+                    </ul>
+                </li>
                 <!-- <li>
                     <a class="nav-submenu" data-toggle="nav-submenu" href=""><i class="fa fa-building"></i><span class="sidebar-mini-hide">Lorem Ipsum</span></a>
                     <ul>

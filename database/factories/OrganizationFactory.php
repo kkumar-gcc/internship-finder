@@ -14,7 +14,10 @@ class OrganizationFactory extends Factory
     public function definition()
     {
         return [
-            //
+           'organization_name'=>$this->faker->name(),
+           'organization_phone'=>$this->faker->phoneNumber(),
+           'user_id'=>$this->faker->numberBetween(0,100),
+           'address_id'=>$this->faker->numberBetween(0,100),
         ];
     }
 }

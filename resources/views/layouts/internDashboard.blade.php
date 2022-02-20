@@ -22,9 +22,12 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/media/favicons/favicon-192x192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/media/favicons/apple-touch-icon-180x180.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&amp;display=swap">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> --}}
     <link rel="stylesheet" id="css-main" href="{{asset ('/css/codebase.min-4.3.css')}}">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-16158021-6"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+@yield('style');
 </head>
 
 <body>
@@ -64,10 +67,9 @@
     </div>
     <script src="{{asset ('/js/codebase.core.min-4.3.js')}}"></script>
     <script src="{{asset ('/js/codebase.app.min-4.3.js')}}"></script>
-<<<<<<< HEAD
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.min.js" integrity="sha512-SXJkO2QQrKk2amHckjns/RYjUIBCI34edl9yh0dzgw3scKu0q4Bo/dUr+sGHMUha0j9Q1Y7fJXJMaBi4xtyfDw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-=======
->>>>>>> create-organisation-staff
+
 </body>
 
 </html>

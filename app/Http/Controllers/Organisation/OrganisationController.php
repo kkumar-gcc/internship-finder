@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Organisation;
 
 use App\Http\Controllers\Controller;
 use App\Models\Intern;
+use App\Models\Internship;
+use App\Models\Proposel;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -27,6 +29,20 @@ class OrganisationController extends Controller
             return view('/OrganisationDashboard/Staff.create');
         }
         redirect('/login');
+    }
+    public function internships()
+    {
+        $internships=Internship::where('organization_id',@auth()->user()->id)->get();
+        return view('OrganisationDashboard.internshipOrganization')
+        ->with(['internships'=>$internships]);
+    }
+    public function internProposel($token)
+    {
+        dd($token);
+        $proposels=Proposel::where('internship_id',$token)->get();
+// dd($proposels);
+        return  view('OrganisationDashboard.internProposel')
+        ->with(['proposels'=>$proposels]);
     }
 
     public function interns()

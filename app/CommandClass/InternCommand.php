@@ -48,11 +48,9 @@ class InternCommand
             'gender' => ['required'],
             'phone' => ['required'],
             'date_of_birth' => ['required'],
-<<<<<<< HEAD
+
             'area_of_interest' => ['required'],
-=======
->>>>>>> create-organisation-staff
-            'house_number' => ['required'],
+     'house_number' => ['required'],
             'city' => ['required'],
             'state' => ['required'],
             'country' => ['required'],

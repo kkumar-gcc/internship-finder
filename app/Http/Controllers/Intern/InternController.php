@@ -8,6 +8,8 @@ use App\Enums\CountryEnum;
 use App\Enums\GenderEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Intern;
+use App\Models\Internship;
+use App\Models\Organization;
 
 class InternController extends Controller
 {
@@ -65,5 +67,57 @@ class InternController extends Controller
         } catch (\Throwable $th) {
             return response()->json($th->getMessage());
         }
+    }
+
+
+    public function organizations()
+    {
+        $organizations = Organization::all();
+        // dd($organizations);
+        return view('InternDashboard/organization.searchOrganization')
+            ->with('organizations', $organizations);
+    }
+
+    public function organizationProfile($token)
+    {
+        $organization =Organization::select('*')->where('id',$token)->first();
+        // dd($organization);
+        return view('InternDashboard/organization.organizationProfile')
+        ->with(['organization'=>$organization]);
+
+    }
+    public function internshipProfile($token)
+    {
+        $internship=Internship::where('id',$token)->first();
+       
+        return view('InternDashboard.internshipProfile')
+        ->with(['internship'=>$internship]);
+    }
+    public function searchOrganization(Request $request)
+    {
+        $request->flash();
+        $interns = Intern::where("area_of_interest", "LIKE", "%{$request['query']}%")
+            ->orWhere("first_name", "LIKE", "%{$request['query']}%")
+            ->get();
+      
+
+     
+        return view('OrganisationDashboard.Intern.searchIntern')->with([
+            "interns" => $interns
+        ]);
+    }
+    public function findOrganization(Request $request)
+    {
+
+        $interns = Intern::where("area_of_interest", "LIKE", "%{$request->input('query')}%")
+            ->get();
+
+        $foundInterns = array();
+
+        foreach ($interns as $intern) {
+            $foundInterns[] = $intern;
+        }
+
+        return response()->json($interns);
     }
 }

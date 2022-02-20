@@ -9,7 +9,7 @@
         <i class="fa fa-search"></i>
       </button>
       <div class="content-header-item d-none d-sm-inline-block">
-        <form action="{{ url('/search') }}" method="GET" id="form_search">
+        <form action="{{ url('/searchIntern') }}" method="GET" id="form_search">
           <div class="input-group">
               <input class="typeahead form-control" name="query" type="text" data-provide="typeahead"
                   id="typeahead" autocomplete="off" value="{{ old('query') }}">
