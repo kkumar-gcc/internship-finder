@@ -38,7 +38,7 @@ class OrganisationController extends Controller
     }
     public function internProposel($token)
     {
-        dd($token);
+       
         $proposels=Proposel::where('internship_id',$token)->get();
 // dd($proposels);
         return  view('OrganisationDashboard.internProposel')

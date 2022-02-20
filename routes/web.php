@@ -52,7 +52,7 @@ Route::get('/organisation-dashboard',[App\Http\Controllers\Organisation\Organisa
 Route::get('/create-staff',[App\Http\Controllers\Organisation\OrganisationController::class,'create']);
 Route::get('/interns',[App\Http\Controllers\Organisation\OrganisationController::class,'interns']);
 Route::get('/organization/internships/',[App\Http\Controllers\Organisation\OrganisationController::class,'internships']);
-Route::get('/organization/internship/{{token}}/proposels',[App\Http\Controllers\Organisation\OrganisationController::class,'internProposel']);
+Route::get('/organization/internship/{token}/proposels',[App\Http\Controllers\Organisation\OrganisationController::class,'internProposel']);
 
 Route::get('/create', [App\Http\Controllers\Intern\InternController::class, 'create']);
 
