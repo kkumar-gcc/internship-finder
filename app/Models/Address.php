@@ -15,4 +15,9 @@ class Address extends Model
             'state',
             'country'
     ];
+
+    public function organization()
+    {
+        return $this->hasOne(Organization::class);
+    }
 }

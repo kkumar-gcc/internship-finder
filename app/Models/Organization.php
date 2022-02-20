@@ -19,9 +19,13 @@ class Organization extends Model
 
     public function staff()
     {
-        return $this->hasMany(staff::class);
+        return $this->hasMany(Staff::class);
     }
 
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -36,15 +36,22 @@ class OrganisationController extends Controller
         return view('OrganisationDashboard.internshipOrganization')
         ->with(['internships'=>$internships]);
     }
-    public function internProposel($token)
+    public function internProposels($token)
     {
        
         $proposels=Proposel::where('internship_id',$token)->get();
-// dd($proposels);
+
         return  view('OrganisationDashboard.internProposel')
         ->with(['proposels'=>$proposels]);
     }
-
+    public function internProposel($token,$id)
+    {
+       
+        $proposel=Proposel::findOrFail($id);
+// dd($proposel->id,$proposel->reason);
+        return  view('OrganisationDashboard.proposel')
+        ->with(['proposel'=>$proposel]);
+    }
     public function interns()
     {
         $interns = Intern::all();
