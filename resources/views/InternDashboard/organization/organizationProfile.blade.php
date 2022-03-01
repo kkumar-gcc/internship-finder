@@ -31,15 +31,15 @@
                         <ul class="list-unstyled mb-0">
                             <li>
                                 <div class="d-flex">
-                                    <label class="text-dark">Owner Name</label>
+                                    <label class="text-dark mr-4">Owner Name</label>
                                     <div>
-                                        <p class="text-muted mb-0">Charles Dickens</p>
+                                        <p class="text-muted mb-0 ">Charles Dickens</p>
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="d-flex">
-                                    <label class="text-dark">Employees</label>
+                                    <label class="text-dark mr-4">Employees</label>
                                     <div>
                                         <p class="text-muted mb-0">1500 - 1850</p>
                                     </div>
@@ -47,25 +47,25 @@
                             </li>
                             <li>
                                 <div class="d-flex">
-                                    <label class="text-dark">Location</label>
+                                    <label class="text-dark mr-4">Location</label>
                                     <div>
-                                        <p class="text-muted mb-0">New York</p>
+                                        <p class="text-muted mb-0 ">New York</p>
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="d-flex">
-                                    <label class="text-dark">Website</label>
+                                    <label class="text-dark mr-4">Website</label>
                                     <div>
-                                        <p class="text-muted text-break mb-0">www.Jobcytecnologypvt.ltd.com</p>
+                                        <a class="text-muted text-break mb-0" href="#">www.Jobcytecnologypvt.ltd.com</a>
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="d-flex">
-                                    <label class="text-dark">Established</label>
+                                    <label class="text-dark mr-4">Established</label>
                                     <div>
-                                        <p class="text-muted mb-0">July 10 2017</p>
+                                        <p class="text-muted mb-0 mr-4">July 10 2017</p>
                                     </div>
                                 </div>
                             </li>
@@ -81,13 +81,13 @@
                             </div>
                             <div class="ur-detail-wrap-body">
                                 <ul class="working-days">
-                                    <li>Monday<span>9AM - 5PM</span></li>
-                                    <li>Tuesday<span>9AM - 5PM</span></li>
-                                    <li>Wednesday<span>9AM - 5PM</span></li>
-                                    <li>Thursday<span>9AM - 5PM</span></li>
-                                    <li>Friday<span>9AM - 5PM</span></li>
-                                    <li>Saturday<span>9AM - 5PM</span></li>
-                                    <li>Sunday<span class="text-danger">Close</span></li>
+                                    <li>Monday<span class="ml-4">9AM - 5PM</span></li>
+                                    <li>Tuesday<span class="ml-4">9AM - 5PM</span></li>
+                                    <li>Wednesday<span class="ml-4">9AM - 5PM</span></li>
+                                    <li>Thursday<span class="ml-4">9AM - 5PM</span></li>
+                                    <li>Friday<span class="ml-4">9AM - 5PM</span></li>
+                                    <li>Saturday<span class="ml-4">9AM - 5PM</span></li>
+                                    <li>Sunday<span class="text-danger ml-4">Close</span></li>
                                 </ul>
                             </div>
                         </div>

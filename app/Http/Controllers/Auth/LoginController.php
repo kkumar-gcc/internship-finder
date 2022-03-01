@@ -27,21 +27,46 @@ class LoginController extends Controller
      *
      * @var string
      */
+    protected $redirectTo;
+
     public function redirectTo()
     {
-
         $userType = auth()->user()->user_type;
-        if ($userType == RegistrationTypeEnum::Intern) {
-            return '/intern-dashboard';
-        }
-        if ($userType == RegistrationTypeEnum::Organisation) {
-            return '/organisation-dashboard';
-        }
-        if (auth()->user()->user_type == "Staff") {
-            return '/organisation-dashboard';
-        }
+        // dd($userType);
         
+        switch ($userType) {
+            case 'Admin':
+            $this->redirectTo = '/admin/dashboard';
+            return $this->redirectTo;
+                break;
+            case 'Organization':
+                $this->redirectTo = '/organization/dashboard';
+                return $this->redirectTo;
+                break;
+            case 'Intern':
+                    $this->redirectTo = '/intern/dashboard';
+                return $this->redirectTo;
+                break;
+            default:
+                $this->redirectTo = '/dashboard'; //if user doesn't have any role
+                return $this->redirectTo;
+        }
     }
+    // public function redirectTo()
+    // {
+
+    //     $userType = auth()->user()->user_type;
+    //     if ($userType == RegistrationTypeEnum::Intern) {
+    //         return '/intern-dashboard';
+    //     }
+    //     if ($userType == RegistrationTypeEnum::Organisation) {
+    //         return '/organisation-dashboard';
+    //     }
+    //     if (auth()->user()->user_type == "Staff") {
+    //         return '/organisation-dashboard';
+    //     }
+        
+    // }
 
     /**
      * Create a new controller instance.

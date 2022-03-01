@@ -4,6 +4,11 @@
 
 <div class="content">
   <a href="/organization/internships/" class="mb-4 btn btn-lg bg-secondary text-light">your internships</a>
+ 
+  @foreach($demos as $demo)
+    <p>{{ $demo }}</p>
+    
+  @endforeach
   <div class="row invisible" data-toggle="appear">
     <div class="col-md-4">
       <a class="block block-rounded block-bordered block-link-shadow" href="javascript:void(0)">

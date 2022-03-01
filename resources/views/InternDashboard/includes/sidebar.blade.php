@@ -27,7 +27,7 @@
             </a>
             <ul class="list-inline mt-10">
                 <li class="list-inline-item">
-                    <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="javascript:void(0)">{{Auth::user()->name}}</a>
+                    <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="javascript:void(0)">{{auth()->user()->name}}</a>
                 </li>
             </ul>
 
@@ -37,7 +37,7 @@
 
             <ul class="nav-main">
                 <li>
-                    <a class="active" href=""><i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Overview</span></a>
+                    <a class="active" href=""><i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Dashboard</span></a>
                 </li>
                 <li class="nav-main-heading"><span class="sidebar-mini-visible">MG</span><span class="sidebar-mini-hidden">Manage</span></li>
                 <li>
@@ -58,19 +58,28 @@
                 </li>
                  <li>
                     @if(!auth()->user()->intern_id)
-                    <a href="/organizations" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Organizations</span></a>
+                    <a href="/intern/organizations" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Organizations</span></a>
                     @else
-                    <a href="" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">POrganizations</span></a>
+                    <a href="" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Find Organization</span></a>
                     @endif
                     <ul>
                         <li>
-                         <a href="/organizations"><i class="far fa-user"> </i> search organization</a>
-                           
-                            {{-- @if(!auth()->user()->intern)
-                            <a href="/create"><i class="far fa-user"> </i> Create Profile</a>
-                            @else
-                            <a href="/intern/edit{{auth()->user()->intern->id}}"><i class="far fa-user"> </i> Edit Profile</a>
-                            @endif --}}
+                         <a href="/intern/organizations"><i class="far fa-user"> </i> Find Organization</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    @if(!auth()->user()->intern_id)
+                    <a href="/organizations" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Internships</span></a>
+                    @else
+                    <a href="" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Find Internship</span></a>
+                    @endif
+                    <ul>
+                        <li>
+                         <a href="/intern/internships/manage"><i class="far fa-user"> </i> Mange Internships</a>
+                        </li>
+                        <li>
+                            <a href="/intern/internships"><i class="far fa-user"> </i>Find Internships</a>
                         </li>
                     </ul>
                 </li>

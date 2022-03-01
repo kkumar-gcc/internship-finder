@@ -13,8 +13,11 @@ class OrganisationController extends Controller
 {
     public function index()
     {
+        $demos=['one','two'];
+         $demos = (object)$demos;
         if (Auth()->check()) {
-            return view('/OrganisationDashboard.home');
+            return view('/OrganisationDashboard.home')
+            ->with('demos',$demos);
         }
         return redirect('/login');
     }

@@ -6,7 +6,7 @@
                 <div class="main_heading heading_1_4 with_line">Web Development internship at MT Academy India Private
                     Limited</div>
                 <div id="form-container">
-                    <form action="/proposel/{{Str::slug($internship->title) }}/{{ $internship->id }}" method="post" enctype="multipart/form-data">
+                    <form action="/intern/proposel/{{Str::slug($internship->title) }}/{{ $internship->id }}" method="post" enctype="multipart/form-data">
                         <div id="assessment_questions_container" class="">
                             <div class=""></div>
                             <div id="assessment_questions">

@@ -46,7 +46,7 @@ class ProposelController extends Controller
         try {
             $proposel =  (new ProposelCommand())->newProposel($formData);
             $proposels=Proposel::where('id',@auth()->user()->id);
-           return redirect('');
+           return redirect('/intern/dashboard');
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }

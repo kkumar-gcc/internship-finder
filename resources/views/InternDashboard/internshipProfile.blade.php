@@ -286,7 +286,7 @@
                                 </li>
                             </ul>
                             <div class="mt-3">
-                                <a href="/apply/{{Str::slug($internship->title) }}/{{ $internship->id }}" data-bs-toggle="modal" class="btn btn-primary btn-hover w-100 mt-2">Apply Now <i class="uil uil-arrow-right"></i></a>
+                                <a href="/intern/apply/{{Str::slug($internship->title) }}/{{ $internship->id }}" data-bs-toggle="modal" class="btn btn-primary btn-hover w-100 mt-2">Apply Now <i class="uil uil-arrow-right"></i></a>
                                 <a href="bookmark-jobs.html" class="btn btn-soft-warning btn-hover w-100 mt-2"><i class="uil uil-bookmark"></i> Add Bookmark</a>
                             </div>
                         </div><!--end card-body-->

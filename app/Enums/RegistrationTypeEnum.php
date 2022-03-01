@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class RegistrationTypeEnum extends Enum
 {
-    const Organisation = "Organisation";
+    const Organization = "Organization";
     const Intern = "Intern";
 }

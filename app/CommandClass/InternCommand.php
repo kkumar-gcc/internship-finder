@@ -50,7 +50,7 @@ class InternCommand
             'date_of_birth' => ['required'],
 
             'area_of_interest' => ['required'],
-     'house_number' => ['required'],
+            'house_number' => ['required'],
             'city' => ['required'],
             'state' => ['required'],
             'country' => ['required'],

@@ -24,7 +24,7 @@
                             <a href="company-details.html" class="primary-link"><h6 class="fs-18 mb-2">{{$organization->organization_name}}</h6></a>
                             <p class="text-muted mb-4">New York</p>
 
-                            <a href="/organizations/{{ $organization->id }}" class="btn btn-primary">{{ $organization->internships->count() }} Opening Internships</a>
+                            <a href="/intern/organizations/{{ $organization->id }}" class="btn btn-primary">{{ $organization->internships->count() }} Opening Internships</a>
                         </div>
                     </div>
                 </div>
@@ -32,6 +32,14 @@
             @endforeach
         </div>
         @endforeach
+        <div class="row">
+            <div class="col-lg-12 mt-4 pt-2">
+                <nav aria-label="Page navigation example p-4">
+                    {{ $organizations->onEachSide(5)->links() }}
+                </nav>
+            </div>
+            <!--end col-->
+        </div><!-- end row -->
     </div>
 </section>
 @endsection
