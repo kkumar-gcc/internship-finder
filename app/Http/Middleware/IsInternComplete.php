@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CustomAuth
+class IsInternComplete
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,14 @@ class CustomAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->complete) { 
-            return  false;
-          }
-        return $next($request);
+        if (!auth()->user()->user_type == 'Intern') {
+            return abort(code: 404);
+        } else {
+            if (!(auth()->user()->complete)) {
+                return  redirect('intern/create');
+            }
+
+            return $next($request);
+        }
     }
 }

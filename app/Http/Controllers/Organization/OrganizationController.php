@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Organisation;
+namespace App\Http\Controllers\Organization;
 
 use App\Http\Controllers\Controller;
 use App\Models\Intern;
@@ -9,7 +9,7 @@ use App\Models\Proposel;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class OrganisationController extends Controller
+class OrganizationController extends Controller
 {
     public function index()
     {

@@ -3,7 +3,10 @@
 namespace App\CommandClass;
 
 use App\Models\Address;
-use App\Models\Intern;;
+use App\Models\Intern;
+use App\Models\User;
+
+;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -35,6 +38,11 @@ class InternCommand
         //save a new intern
         $intern = new Intern();
         $this->saveInternData($formData, $intern);
+
+        $user=User::find(auth()->user()->id);
+        $user->complete=true;
+        $user->save();
+        
         return ['success' => true, 'data' => $intern];
     }
 
@@ -63,13 +71,19 @@ class InternCommand
 
         $intern = Intern::find($id);
         $this->saveInternData($formData, $intern);
+
+
+
         return ['success' => false, 'data' => $intern];
     }
 
     public function saveInternData($formData, $intern)
     {
         //get id of current user
+       
         $loggedInUserId = Auth()->user()->id;
+
+        
         $intern->user_id = $loggedInUserId;
         $intern->first_name = $formData['first_name'];
         $intern->last_name = $formData['last_name'];
@@ -79,7 +93,8 @@ class InternCommand
         $intern->date_of_birth = $formData['date_of_birth'];
         $intern->area_of_interest = $formData['area_of_interest'];
         $intern->save();
-
+       
+       
         //save and intern address
         $address = new Address();
         $address->house_number = $formData['house_number'];
@@ -91,5 +106,9 @@ class InternCommand
         //update intern address
         $intern->address_id = $address->id;
         $intern->save();
+
+
+       
+
     }
 }

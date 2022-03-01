@@ -341,7 +341,7 @@
                                 </li>
                             </ul>
                             <div class="mt-4">
-                                <a href="/organizations/{{ $internship->organization->id }}" class="btn btn-primary btn-hover w-100 rounded"><i class="mdi mdi-eye"></i> View Profile</a>
+                                <a href="/intern/organizations/{{ $internship->organization->id }}" class="btn btn-primary btn-hover w-100 rounded"><i class="mdi mdi-eye"></i> View Profile</a>
                             </div>
                         </div>
                     </div>

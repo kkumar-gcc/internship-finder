@@ -48,7 +48,7 @@ class Kernel extends HttpKernel
         'user_type' => [
             'organization' => \App\Http\Middleware\Organization::class,
             'intern' => \App\Http\Middleware\Intern::class,
-             ]
+        ]
     ];
 
     /**
@@ -68,11 +68,10 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'completeProifle'=>\App\Http\Middleware\CustomAuth::class,
-      
-
+        'isInternComplete' =>\App\Http\Middleware\IsInternComplete::class,
+        // 'isOrganizationComplete' =>\App\Http\Middleware\IsOrganizationComplete::class,
         // 'admin' => \App\Http\Middleware\Admin::class,
-        // 'organization' => \App\Http\Middleware\Organization::class,
-        // 'intern' => \App\Http\Middleware\Intern::class,
+        'organization' => \App\Http\Middleware\Organization::class,
+        'intern' => \App\Http\Middleware\Intern::class,
     ];
 }

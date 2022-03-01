@@ -16,6 +16,7 @@ class InternController extends Controller
 {
     public function index()
     {
+
         if (Auth()->check()) {
             // dd(auth()->user()->id);
 
@@ -102,9 +103,10 @@ class InternController extends Controller
 
     public function internshipsManage($token)
     {
-        dd($token);
-        $proposels = Proposel::where('intern_id', $token)->first();
-
+        // dd($token);
+        // dd(auth()->user()->id,auth()->user()->intern->id);
+        $proposels = Proposel::where('intern_id', $token)->paginate($perPage = 5, $columns = ['*'], $pageName = 'proposels');
+// dd($proposels);
         return view('InternDashboard.internship.manageInternships')
             ->with(['proposels' => $proposels]);
     }

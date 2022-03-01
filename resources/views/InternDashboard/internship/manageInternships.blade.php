@@ -1,45 +1,81 @@
 @extends('layouts.internDashboard')
 @section('content')
-<section id="show-interns" class="ftco-section ftco-agent">
-    <div class="container">
-        <div class="row justify-content-center pb-5">
-            <div class="col-md-12 heading-section text-center ftco-animate">
-                <span class="subheading">organizations</span>
-                <h2 class="mb-4">Meet Various Organizations</h2>
-            </div>
-        </div>
-        
-        @foreach($organizations->chunk(4) as $chunk)
-        <div class="row justify-content-center">
-            @foreach($chunk as $organization)
-           
-            <div class="col-lg-3 col-md-6">
-                <div class="card text-center mb-4">
-                    <div class="card-body px-4 py-5">
-                        {{-- <div class="featured-label">
-                            <span class="featured">4.9 <i class="mdi mdi-star-outline"></i></span>
-                        </div> --}}
-                        <img src="{{asset ('ProfilePhoto')}}/i{{$organization->id%26}}.jpg" alt=""  style="width: 200px; height:200px;" class="img-fluid rounded-3 mt-2">
-                        <div class="mt-4 mb-4">
-                            <a href="company-details.html" class="primary-link"><h6 class="fs-18 mb-2">{{$organization->organization_name}}</h6></a>
-                            <p class="text-muted mb-4">New York</p>
-
-                            <a href="/intern/organizations/{{ $organization->id }}" class="btn btn-primary">{{ $organization->internships->count() }} Opening Internships</a>
-                        </div>
+{{-- <section id="show-interns" class="ftco-section ftco-agent"> --}}
+   
+    <section class="section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="mb-4 mb-lg-0">
+                        <h6 class="mb-0"> My Job Listings </h6>
                     </div>
+                </div><!--end col-->
+              
+            </div><!--end row-->
+            <div class="row">
+                @foreach($proposels as $proposel)
+                <div class="col-lg-12">
+
+                    <div class="job-box card mt-4">
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <a href="company-details.html"><img src="{{asset ('ProfilePhoto')}}/i{{$proposel->id%26}}.jpg" alt="" class="img-fluid rounded-3"></a>
+                                </div><!--end col-->
+                                <div class="col-lg-9">
+                                    <div class="mt-3 mt-lg-0">
+                                        <h5 class="fs-17 mb-1"><a href="job-details.html" class="text-dark">Project Manager</a> <small class="text-muted fw-normal">(0-2 Yrs Exp.)</small></h5>
+                                        <ul class="list-inline mb-0">
+                                            <li class="list-inline-item">
+                                                <p class="text-muted fs-14 mb-0">{{ $proposel->internship->organization->organization_name }}</p>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i> California</p>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i> $250 - $800 / month</p>
+                                            </li>
+                                        </ul>
+                                        <div class="mt-2">
+                                            <span class="badge bg-soft-success bg-success  mt-1 p-2">Full Time</span>
+                                            <span class="badge bg-warning  mt-1 p-2">Urgent</span>
+                                            <span class="badge bg-soft-info bg-info p-2 mt-1">Private</span>
+                                        </div>
+                                    </div>
+                                </div><!--end col-->
+                                <div class="col-lg-2 align-self-center">
+                                    <ul class="list-inline mt-3 mb-0">
+                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                                            <a href="manage-jobs-post.html" class="avatar-sm bg-success d-inline-block text-center rounded-circle fs-18">
+                                                <i class="uil uil-edit"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#deleteModal" class="avatar-sm bg-danger d-inline-block text-center rounded-circle fs-18">
+                                                <i class="uil uil-trash-alt"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </div>
+                    </div><!--end job-box-->
+                </div><!--end col-->  
+                
+                @endforeach
+            </div><!--end row-->
+
+            <div class="row">
+                <div class="col-lg-12 mt-4 pt-2">
+                    <nav aria-label="Page navigation example p-4">
+                        {{ $proposels->onEachSide(5)->links() }}
+                    </nav>
                 </div>
-            </div><!--end col-->
-            @endforeach
-        </div>
-        @endforeach
-        <div class="row">
-            <div class="col-lg-12 mt-4 pt-2">
-                <nav aria-label="Page navigation example p-4">
-                    {{ $organizations->onEachSide(5)->links() }}
-                </nav>
-            </div>
-            <!--end col-->
-        </div><!-- end row -->
-    </div>
-</section>
+                <!--end col-->
+            </div><!-- end row -->
+        </div><!--end container-->
+    </section>
+   
+  
+
 @endsection

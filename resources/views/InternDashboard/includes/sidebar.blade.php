@@ -42,14 +42,14 @@
                 <li class="nav-main-heading"><span class="sidebar-mini-visible">MG</span><span class="sidebar-mini-hidden">Manage</span></li>
                 <li>
                     @if(!auth()->user()->intern_id)
-                    <a href="/create" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Profile</span></a>
+                    <a href="/intern/create" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Profile</span></a>
                     @else
                     <a href="" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Profile</span></a>
                     @endif
                     <ul>
                         <li>
                             @if(!auth()->user()->intern)
-                            <a href="/create"><i class="far fa-user"> </i> Create Profile</a>
+                            <a href="/intern/create"><i class="far fa-user"> </i> Create Profile</a>
                             @else
                             <a href="/intern/edit{{auth()->user()->intern->id}}"><i class="far fa-user"> </i> Edit Profile</a>
                             @endif
@@ -76,7 +76,7 @@
                     @endif
                     <ul>
                         <li>
-                         <a href="/intern/internships/manage"><i class="far fa-user"> </i> Mange Internships</a>
+                         <a href="/intern/internships/manage/{{ auth()->user()->intern->id }}"><i class="far fa-user"> </i> Mange Internships</a>
                         </li>
                         <li>
                             <a href="/intern/internships"><i class="far fa-user"> </i>Find Internships</a>

@@ -63,8 +63,8 @@ class ProposelCommand
     public function saveProposelData($formData, $proposel)
     {
         //get id of current user
-        $loggedInUserId = Auth()->user()->id;
-        $proposel->intern_id = $loggedInUserId;
+        $loggedInInternId = Auth()->user()->intern->id;
+        $proposel->intern_id = $loggedInInternId;
         $proposel->reason = $formData['reason'];
         $proposel->available_time = $formData['available_time'];
         $proposel->internship_id = $formData['internshipId'];

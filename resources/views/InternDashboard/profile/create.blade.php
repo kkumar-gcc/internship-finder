@@ -11,7 +11,7 @@
   </div>
   <div class="block block-rounded block-fx-shadow">
     <div class="block-content">
-      <form action="/intern" method="post" enctype="multipart/form-data">
+      <form action="/intern/create/profile" method="post" enctype="multipart/form-data">
         @csrf
         <h2 class="content-heading text-black">Vital Info</h2>
 

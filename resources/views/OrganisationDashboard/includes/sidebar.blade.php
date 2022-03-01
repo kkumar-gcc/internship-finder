@@ -37,19 +37,19 @@
 
             <ul class="nav-main">
                 <li>
-                    <a class="active" href=""><i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Overview</span></a>
+                    <a class="active" href="/organization/dashboard"><i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Overview</span></a>
                 </li>
                 <li class="nav-main-heading"><span class="sidebar-mini-visible">MG</span><span class="sidebar-mini-hidden">Manage</span></li>
                 <li>
                     @if(!auth()->user()->intern_id)
-                    <a href="/create-staff" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"></i><span class="sidebar-mini-hide">Staff</span></a>
+                    <a href="/organization/create-staff" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"></i><span class="sidebar-mini-hide">Staff</span></a>
                     @else
-                    <a href="/create-staff" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"></i><span class="sidebar-mini-hide">Staff</span></a>
+                    <a href="/organization/create-staff" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"></i><span class="sidebar-mini-hide">Staff</span></a>
                     @endif
                     <ul>
                         <li>
                             @if(auth()->user()->user_type == "Staff")
-                            <a href="/create-staff"><i class="far fa-user"></i>Profile</a>
+                            <a href="/organization/create-staff"><i class="far fa-user"></i>Profile</a>
                             @else
                             <a href="#"><i class="far fa-user"></i>Create Staff</a>
                             @endif
@@ -60,10 +60,10 @@
                     <a class="nav-submenu" data-toggle="nav-submenu" href=""><i class="fa fa-building"></i><span class="sidebar-mini-hide">Interns</span></a>
                     <ul>
                         <li>
-                            <a href="/interns">Find Intern</a>
+                            <a href="/organization/interns">Find Intern</a>
                         </li>
                         <li>
-                            <a href="">Selected Interns</a>
+                            <a href="/organization/dashboard">Selected Interns</a>
                         </li>
                     </ul>
                 </li>

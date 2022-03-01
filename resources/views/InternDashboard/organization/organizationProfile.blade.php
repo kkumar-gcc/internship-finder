@@ -130,7 +130,7 @@
                                         </div><!--end col-->
                                         <div class="col-lg-10">
                                             <div class="mt-3 mt-lg-0">
-                                                <h5 class="fs-16 fw-medium mb-1"><a href="/internships/{{ $internship->id }}" class="text-dark">{{ $internship->title }}</a> <small class="text-muted fw-normal">(0-5 Yrs Exp.)</small></h5>
+                                                <h5 class="fs-16 fw-medium mb-1"><a href="/intern/internships/{{ $internship->id }}" class="text-dark">{{ $internship->title }}</a> <small class="text-muted fw-normal">(0-5 Yrs Exp.)</small></h5>
                                                 <ul class="list-inline mb-0">
                                                     <li class="list-inline-item">
                                                         <p class="text-muted fs-14 mb-0">{{ $organization->organization_name }}</p>
@@ -166,7 +166,7 @@
                                         <!--end col-->
                                         <div class="col-md-4">
                                             <div class="text-md-end">
-                                                <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                                                <a href="/intern/internships/{{ $internship->id }}" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
                                             </div>
                                         </div>
                                         <!--end col-->

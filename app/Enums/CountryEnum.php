@@ -14,4 +14,5 @@ final class CountryEnum extends Enum
     const Nigeria = "Nigeria";
     const Canada =   "Canada";
     const Germany = "Germany";
+    const India = "India";
 }

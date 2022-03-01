@@ -35,18 +35,13 @@ class AuthServiceProvider extends ServiceProvider
          });
  
        
-        //  Gate::define('isOrganization', function($user) {
+         Gate::define('isOrganization', function($user) {
  
-        //      return $user->user_type == 'Organization';
+             return $user->user_type == 'Organization';
  
-        //  });
+         });
          
-         Gate::define('isOrganization', function ($user) {
-            if ($user->user_type == 'Organization') {
-                return true;
-            }
-            return false;
-        });
+      
 
     }
 }

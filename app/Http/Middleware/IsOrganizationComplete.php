@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class Intern
+class IsOrganizationComplete
 {
     /**
      * Handle an incoming request.
@@ -17,12 +16,14 @@ class Intern
      */
     public function handle(Request $request, Closure $next)
     {
-        // if (auth()->user()->user_type == 'Organization') {
-        //     return abort(code:404);
-        //  }
-        if (!auth()->user()->user_type == 'Intern') {
-           return abort(code:404);
+        if (!auth()->user()->user_type == 'Organization') {
+            return abort(code: 404);
+        } else {
+            if (!(auth()->user()->complete)) {
+                return  redirect('organization/create');
+            }
+
+            return $next($request);
         }
-         return $next($request);
     }
 }
