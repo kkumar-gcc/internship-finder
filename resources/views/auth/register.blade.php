@@ -25,7 +25,7 @@
                             <a href="#" class="btn btn-next  width-50 ml-auto logs">Next</a>
                         </div>
                     </div>
-                    <div class="child-container">
+                    {{-- <div class="child-container">
                         <form action="#" method="POST" class="form">
                             <input type="text" placeholder="Full Name" id="name" name="name" required>
                             <div class="btn-group ">
@@ -33,7 +33,7 @@
                                 <a href="#" class="btn btn-next logs">Next</a>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                     <div class="child-container">
                         <input type="email" placeholder="Email" id="email" name="email" required>
                         <div class="btn-group ">
@@ -42,13 +42,13 @@
                         </div>
                     </div>
 
-                    <div class="child-container">
+                    {{-- <div class="child-container">
                         <input type="file" class="custom-file-input" name="photo" data-toggle="custom-file-input">
                         <div class="btn-group ">
                             <a href="#" class="btn btn-prev logs">Previous</a>
                             <a href="#" class="btn btn-next logs">Next</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="child-container">
                         <input type="password" placeholder="Password" id="name" required name="password">
                         <input type="password" placeholder="Confirm Password" name="password_confirmation" id="name">

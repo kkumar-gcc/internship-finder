@@ -8,6 +8,9 @@ use App\Models\Internship;
 use App\Models\Proposel;
 use Illuminate\Http\Request;
 use App\CommandClass\ProposelCommand;
+use Illuminate\Support\Facades\Redirect;
+use stdClass;
+
 class ProposelController extends Controller
 {
     /**
@@ -15,12 +18,24 @@ class ProposelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function applyForm($internName,$token)
+    public function applyForm($internName, $token)
     {
-        // dd($token);
-        $internship=Internship::where('id',$token)->first();
+        $internship = Internship::where('id', $token)->first();
+    
+        $proposelStatus=new stdClass();
+        $proposel = Proposel::where('intern_id', auth()->user()->intern->id)->where('internship_id', $token)->first();
+           if($proposel){
+               $proposelStatus=$proposel;
+           }
+           else{
+               $proposelStatus->status='Apply';
+           }
+           
         return view('InternDashboard.organization.apply')
-        ->with(['internship'=>$internship]);
+            ->with([
+                'internship' => $internship,
+                'proposel'=>$proposelStatus
+            ]);
     }
 
     /**
@@ -39,18 +54,22 @@ class ProposelController extends Controller
      * @param  \App\Http\Requests\StoreProposelRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$internName,$token)
+    public function store(StoreProposelRequest $request,$internName,$token)
     {
-        // dd($request);
         $formData = $request->all();
         try {
             $proposel =  (new ProposelCommand())->newProposel($formData);
-            $proposels=Proposel::where('id',@auth()->user()->id);
-           return redirect('/intern/internships/manage/'.auth()->user()->intern->id);
+            if($proposel['success']){
+                 return redirect('/intern/internships/manage/' . auth()->user()->intern->id);
+            }
+            else{
+                return redirect()->back()->withInput($request->input())->withErrors($proposel['data']);
+            }   
         } catch (\Throwable $th) {
+
             dd($th->getMessage());
+          
         }
-    
     }
 
     /**

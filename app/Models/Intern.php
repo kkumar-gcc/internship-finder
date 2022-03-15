@@ -23,4 +23,12 @@ class Intern extends Model
     {
         return $this->hasMany(Proposel::class);
     }
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
+    // public function internships()
+    // {
+    //     return $this->belongsToMany(Internship::class);
+    // }
 }

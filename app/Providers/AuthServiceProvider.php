@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Proposel;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -36,11 +37,12 @@ class AuthServiceProvider extends ServiceProvider
  
        
          Gate::define('isOrganization', function($user) {
- 
              return $user->user_type == 'Organization';
- 
          });
-         
+
+        //  Gate::define('isApplied',function($user,$proposel){
+
+        //  })
       
 
     }

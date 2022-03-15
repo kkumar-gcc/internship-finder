@@ -1,101 +1,98 @@
 @extends('layouts.internDashboard')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+@endsection
 @section('content')
     <section id="show-interns" class="ftco-section ftco-agent">
         <div class="container">
             <div class="row justify-content-center pb-5">
                 <div class="col-md-12 heading-section text-center ftco-animate">
-                    <span class="subheading">organizations</span>
-                    <h2 class="mb-4">Meet Various Organizations</h2>
+                    <span class="subheading">Internships</span>
+                    <h2 class="mb-4">Apply for Verious Internships</h2>
                 </div>
             </div>
 
 
-            <div class="row">
+            <div class="internship-container row">
                 <div class="col-lg-9">
-                    <div class="me-lg-5">
+                    <!-- Job-list -->
 
-                        <!-- Job-list -->
-                        <div>
-                            @foreach ($internships as $internship)
-                                <div class="job-box card mt-4">
-                                    <div class="p-4">
-                                        <div class="row">
-
-                                            <div class="col-lg-2">
-                                                <a href="/intern/organizations/{{ $internship->organization->id }}"><img
-                                                        src="{{ asset('ProfilePhoto') }}/i{{ $internship->id % 26 }}.jpg"
-                                                        alt="" style="width: 100px; height:120px;"
-                                                        class="rounded-3 mt-2"></a>
-                                            </div>
-                                            <!--end col-->
-                                            <div class="col-lg-10">
-                                                <div class="mt-3 mt-lg-0">
-                                                    <h5 class="fs-17 mb-1"><a href="/intern/internships/{{ $internship->id }}"
-                                                            class="text-dark">Business Associate</a></h5>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item">
-                                                            <p class="text-muted fs-14 mb-0">
-                                                                {{ $internship->organization->organization_name }}</p>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <p class="text-muted fs-14 mb-0"><i
-                                                                    class="mdi mdi-map-marker"></i> California</p>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i>
-                                                                $250 - $800 / month</p>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="mt-2">
-                                                        <span class="badge bg-soft-danger mt-1">Part Time</span>
-                                                        <span class="badge bg-soft-warning mt-1">Urgent</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--end col-->
+                    @foreach ($internships as $internship)
+                        <div class="internship-card card">
+                            <div class="row internship-card-top">
+                                <div class="col-lg-2">
+                                    <a href="/intern/organizations/{{ $internship->organization_id}}"><img
+                                            src="{{ asset('ProfilePhoto') }}/i{{ $internship->id % 26 }}.jpg" alt=""
+                                             class="rounded-3"></a>
+                                </div>
+                                <!--end col-->
+                                <div class="col-lg-10">
+                                    <div class="mt-3 mt-lg-0">
+                                        <h5 class="fs-17 mb-1"><a href="/intern/internships/{{ $internship->id }}"
+                                                class="text-dark">{{ $internship->title }}</a></h5>
+                                        <ul class="list-inline mb-0">
+                                            {{-- <li class="list-inline-item">
+                                                <p class="text-muted fs-14 mb-0">
+                                                    {{ $internship->organization->}}</p>
+                                            </li> --}}
+                                            <li class="list-inline-item">
+                                                <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i>
+                                                    {{ $internship->city }}</p>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i>
+                                                    ${{ $internship->salary }}/ month</p>
+                                            </li>
+                                        </ul>
+                                        <div class="mt-2">
+                                            <span class="badge bg-soft-danger mt-1">Part Time</span>
+                                            <span class="badge bg-soft-warning mt-1 ml-5">Urgent</span>
                                         </div>
-                                        <!--end row-->
-                                    </div>
-                                    <div class="p-3 bg-light">
-                                        <div class="row justify-content-between">
-                                            <div class="col-md-8">
-                                                <div>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item"><i class="uil uil-tag"></i> Keywords
-                                                            :</li>
-                                                        <li class="list-inline-item"><a href="javascript:void(0)"
-                                                                class="primary-link text-muted">Ui designer</a>,</li>
-                                                        <li class="list-inline-item"><a href="javascript:void(0)"
-                                                                class="primary-link text-muted">Manager</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <!--end col-->
-                                            <div class="col-md-3">
-                                                <div class="text-md-end">
-                                                    <a href="/intern/internships/{{ $internship->id }}"
-                                                        data-bs-toggle="modal" class="primary-link">Apply Now <i
-                                                            class="mdi mdi-chevron-double-right"></i></a>
-                                                </div>
-                                            </div>
-                                            <!--end col-->
-                                        </div>
-                                        <!--end row-->
                                     </div>
                                 </div>
-                                <!--end job-box-->
-                            @endforeach
-                        </div>
-                        <!-- End Job-list -->
-
-                        <div class="row">
-                            <div class="col-lg-12 mt-4 pt-2">
-                                <nav aria-label="Page navigation example p-4">
-                                    {{ $internships->onEachSide(5)->links() }}
-                                </nav>
+                                <!--end col-->
                             </div>
-                            <!--end col-->
-                        </div><!-- end row -->
+
+                            <div class="internship-card-bottom">
+                                <div class="row justify-content-between">
+                                    <div class="col-md-8 mt-5">
+                                        <div>
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item"><i class="uil uil-tag"></i> Keywords
+                                                    :</li>
+                                                <li class="list-inline-item"><a href="javascript:void(0)"
+                                                        class="primary-link text-muted">Ui designer</a>,</li>
+                                                <li class="list-inline-item"><a href="javascript:void(0)"
+                                                        class="primary-link text-muted">Manager</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-md-3">
+                                        <div class="text-md-end">
+                                            <a href="/intern/internships/{{ $internship->id }}" data-bs-toggle="modal"
+                                                class="btn btn-primary show-card-btn mt-5" >Apply Now <i
+                                                    class="mdi mdi-chevron-double-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+                            </div>
+                        </div>
+                        <!--end job-box-->
+                    @endforeach
+
+                    <!-- End Job-list -->
+
+                    <div class="row">
+                        <div class="col-lg-12 mt-4 pt-2">
+                            <nav aria-label="Page navigation example p-4">
+                                {{ $internships->onEachSide(5)->links() }}
+                            </nav>
+                        </div>
+                        <!--end col-->
+
                     </div>
 
                 </div>
@@ -295,10 +292,14 @@
                                 <div id="tagcloud" class="accordion-collapse collapse show" aria-labelledby="tagCloud">
                                     <div class="accordion-body">
                                         <div class="side-title">
-                                            <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">design</a>
-                                            <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">marketing</a>
-                                            <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">business</a>
-                                            <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">developer</a>
+                                            <a href="javascript:void(0)"
+                                                class="badge bg-info tag-cloud fs-13 mt-2">design</a>
+                                            <a href="javascript:void(0)"
+                                                class="badge bg-info tag-cloud fs-13 mt-2">marketing</a>
+                                            <a href="javascript:void(0)"
+                                                class="badge bg-info tag-cloud fs-13 mt-2">business</a>
+                                            <a href="javascript:void(0)"
+                                                class="badge bg-info tag-cloud fs-13 mt-2">developer</a>
                                         </div>
                                     </div>
                                 </div>

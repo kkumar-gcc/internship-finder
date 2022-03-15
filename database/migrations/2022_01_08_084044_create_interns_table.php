@@ -23,6 +23,7 @@ class CreateInternsTable extends Migration
             $table->string('phone');
             $table->date('date_of_birth');
             $table->string('area_of_interest');
+            $table->string('profile_image');
             $table->timestamps();
 
             $table->foreign('address_id')

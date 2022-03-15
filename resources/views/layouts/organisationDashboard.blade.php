@@ -25,7 +25,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/media/favicons/apple-touch-icon-180x180.png">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&amp;display=swap">
-    <link rel="stylesheet" id="css-main" href="{{ asset('/css/codebase.min-4.3.css') }}">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link rel="stylesheet" id="css-main" href="{{ asset('/css/codebase.min-4.3.css') }}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"
@@ -35,7 +36,8 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-16158021-6"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-  <main>
+        
+        <main>
       @yield('styleLink')
   </main>
 </head>
@@ -80,8 +82,9 @@
     </div>
     <script src="{{ asset('/js/codebase.core.min-4.3.js') }}"></script>
     <script src="{{ asset('/js/codebase.app.min-4.3.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
      <main>
-         @yield('scriptLink')
+         @yield('script')
      </main>
     <script type="text/javascript">
         var path = "{{ url('demo/search') }}";

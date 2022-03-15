@@ -16,6 +16,7 @@ class ProposelFactory extends Factory
         return [
             'reason'=>$this->faker->realText(60),
             'available_time'=>$this->faker->realText(30),
+            'status'=>$this->faker->randomElement(['Applied', 'Apply', 'Active']),
         ];
     }
 }

@@ -12,7 +12,9 @@ class Proposel extends Model
 
     protected $fillable = [
         'reason',
-        'available_time'
+        'available_time',
+        'intern_id',
+        'internship_id',
     ];
     public function internship()
     {

@@ -17,9 +17,10 @@ class Organization
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->user()->user_type == 'Organization'){
-           return abort(code:404);
-        } 
-         return $next($request);
+        if (!auth()->user()->user_type == 'Organization') {
+            return abort(code: 404);
+        }
+
+        return $next($request);
     }
 }

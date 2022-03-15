@@ -6,11 +6,13 @@
                 <div class="main_heading heading_1_4 with_line">Web Development internship at MT Academy India Private
                     Limited</div>
                 <div id="form-container">
-                    <form action="/intern/proposel/{{Str::slug($internship->title) }}/{{ $internship->id }}" method="post" enctype="multipart/form-data">
+                    <form action="/intern/proposel/{{ Str::slug($internship->title) }}/{{ $internship->id }}"
+                        method="post" enctype="multipart/form-data">
                         <div id="assessment_questions_container" class="">
                             <div class=""></div>
                             <div id="assessment_questions">
                                 <input type="hidden" name="internshipId" value="{{ $internship->id }}">
+                                <input type="hidden" name="status" value="Applied">
                                 @csrf
                                 <h4>Cover letter</h4>
                                 <div class="form-group">
@@ -20,9 +22,15 @@
                                     </div>
 
                                     <div class="cover_letter_container">
-                                        <textarea name="reason" class="textarea form-control"
-                                            placeholder="{{ auth()->user()->name }}, employers see the answer to this question even before they view your resume. Answer this question carefully and add relevant information like your skills/experience and why you find the role exciting."></textarea>
-
+                                        <textarea name="reason" class="textarea form-control @error('reason') is-invalid @enderror"
+                                            placeholder="{{ auth()->user()->name }}, employers see the answer to this question even before they view your resume. Answer this question carefully and add relevant information like your skills/experience and why you find the role exciting."
+                                            {{ $proposel->status != 'Apply' ? 'disabled' : '' }}>{{ $proposel->status != 'Apply' ? $proposel->reason :old('reason') }}</textarea>
+                                        
+                                        @error('reason')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -37,21 +45,30 @@
                                             time, specify the number of hours you can spend on this internship every day.
                                         </label>
                                     </div>
-                                    <textarea name="available_time" id="text_3273911" class="textarea form-control"
+                                    <textarea name="available_time" id="text_3273911" class="textarea form-control @error('available_time') is-invalid @enderror"
                                         placeholder="e.g. I am available full time in Pune for the next 6 months, but will have exams for 15 days in June."
-                                        aria-required="true"></textarea>
+                                        aria-required="true"
+                                        {{ $proposel->status != 'Apply' ? 'disabled' : '' }}>{{ $proposel->status != 'Apply' ? $proposel->available_time :old('available_time') }}</textarea>
                                     <label id="text_3273911-error" class="help-block form-error" for="text_3273911"></label>
+                                    @error('available_time')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
 
 
                                 <div class="submit_button_container">
                                     <input type="submit" name="submit" id="submit"
-                                        class="btn btn-large bg-secondary text-light" value="Submit">
+                                        class="btn btn-large {{ $proposel->status != 'Apply' ? 'bg-soft-success' : 'bg-secondary' }}  text-light"
+                                        {{ $proposel->status != 'Apply' ? 'disabled' : '' }}
+                                        value="{{ $proposel->status }}">
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
+
 
             </div>
         </div>

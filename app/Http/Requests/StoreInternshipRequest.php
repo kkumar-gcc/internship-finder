@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreInternshipRequest extends FormRequest
 {
@@ -13,6 +14,9 @@ class StoreInternshipRequest extends FormRequest
      */
     public function authorize()
     {
+        if(Auth::check()){
+            return true;
+        }
         return false;
     }
 

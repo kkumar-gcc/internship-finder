@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Organization;
 
 use App\Http\Controllers\Controller;
 use App\Models\Intern;
+use App\CommandClass\OrganizationCommand;
 use App\Models\Internship;
 use App\Models\Proposel;
+use App\Enums\CountryEnum;
+use App\Enums\GenderEnum;
+use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -28,14 +32,65 @@ class OrganizationController extends Controller
     }
     public function create()
     {
-        if (Auth()->check()) {
-            return view('/OrganisationDashboard/Staff.create');
-        }
-        redirect('/login');
+        $gender = GenderEnum::toSelectArray();
+        $country = CountryEnum::toSelectArray();
+        return view('OrganisationDashboard.profile.create')
+            ->with('gender', $gender)
+            ->with('country', $country);
+     
     }
+
+
+
+
+
+    public function store(Request $request)
+    {
+        $formData = $request->all();
+       
+        try {
+            $organization =  (new OrganizationCommand())->newOrganization($formData);
+            
+            $request->session()->flash('status', "Profile created succesfully");
+            return redirect('/organization/dashboard');
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage());
+        }
+    }
+
+    // public function editOrganization($id)
+    // {
+    //     $organization = Organization::find($id);
+    //     $gender = GenderEnum::toSelectArray();
+    //     $country = CountryEnum::toSelectArray();
+    //     return view('\internDashboard\profile.edit')
+    //         ->with('gender', $gender)
+    //         ->with('country', $country)
+    //         ->with('organization', $organization);
+    // }
+
+    // public function updateIntern(Request $request, $id)
+    // {
+    //     $formData = $request->all();
+    //     try {
+    //         $intern = (new OrganizationCommand())->updateOrganization($formData, $id);
+    //         session()->flash('status', 'Profile updated succesfully');
+    //         return redirect('/intern-dashboard');
+    //     } catch (\Throwable $th) {
+    //         return response()->json($th->getMessage());
+    //     }
+    // }
+
+
+
+
+
+
+
     public function internships()
     {
-        $internships=Internship::where('organization_id',@auth()->user()->id)->get();
+        $internships=Internship::where('organization_id',auth()->user()->organization->id)->get();
+      
         return view('OrganisationDashboard.internshipOrganization')
         ->with(['internships'=>$internships]);
     }

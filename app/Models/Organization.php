@@ -10,8 +10,8 @@ class Organization extends Model
     use HasFactory;
 
     protected $fillable = [
-        'organization_name',
-        'organization_phone',
+        'name',
+        'profile_image',
         'user_id',
         'address_id',
         //  'verified_at'

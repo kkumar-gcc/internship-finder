@@ -4,9 +4,7 @@ namespace App\CommandClass;
 
 use App\Models\Address;
 use App\Models\Intern;
-use App\Models\User;
-
-;
+use App\Models\User;;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -39,10 +37,10 @@ class InternCommand
         $intern = new Intern();
         $this->saveInternData($formData, $intern);
 
-        $user=User::find(auth()->user()->id);
-        $user->complete=true;
+        $user = User::find(auth()->user()->id);
+        $user->complete = true;
         $user->save();
-        
+
         return ['success' => true, 'data' => $intern];
     }
 
@@ -56,14 +54,14 @@ class InternCommand
             'gender' => ['required'],
             'phone' => ['required'],
             'date_of_birth' => ['required'],
-
+            'profile_image' => ['required'],
             'area_of_interest' => ['required'],
             'house_number' => ['required'],
             'city' => ['required'],
             'state' => ['required'],
             'country' => ['required'],
         ];
-
+       
         $validator = Validator::make($formData, $rules);
         if ($validator->fails()) {
             return ['success' => false, 'data' => $validator->errors(), 400];
@@ -80,10 +78,15 @@ class InternCommand
     public function saveInternData($formData, $intern)
     {
         //get id of current user
+        $internPhoto = "noimage.png";
+        $internPhoto = date('mdYHis') . uniqid() . '.' . $formData['photo']->extension();
+        $formData['photo']->move(public_path('ProfilePhoto'), $internPhoto);
+
+       
        
         $loggedInUserId = Auth()->user()->id;
 
-        
+
         $intern->user_id = $loggedInUserId;
         $intern->first_name = $formData['first_name'];
         $intern->last_name = $formData['last_name'];
@@ -92,9 +95,10 @@ class InternCommand
         $intern->phone = $formData['phone'];
         $intern->date_of_birth = $formData['date_of_birth'];
         $intern->area_of_interest = $formData['area_of_interest'];
+        $intern->profile_image=$internPhoto;
         $intern->save();
-       
-       
+
+
         //save and intern address
         $address = new Address();
         $address->house_number = $formData['house_number'];
@@ -106,9 +110,5 @@ class InternCommand
         //update intern address
         $intern->address_id = $address->id;
         $intern->save();
-
-
-       
-
     }
 }

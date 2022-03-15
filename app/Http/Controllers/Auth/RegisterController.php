@@ -51,9 +51,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'image' => 'nullable|file|image|mimes:jpeg,png,jpg|max:5000',
+            // 'image' => 'nullable|file|image|mimes:jpeg,png,jpg|max:5000',
             'userType' => ['required', 'string', 'max:255'],
-            'name' => ['required', 'string', 'max:255'],
+            // 'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -78,22 +78,22 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        $userPhoto = "noimage.png";
-        $userPhoto = date('mdYHis') . uniqid() . '.' . $data['photo']->extension();
-        $data['photo']->move(public_path('ProfilePhoto'), $userPhoto);
+        // $userPhoto = "noimage.png";
+        // $userPhoto = date('mdYHis') . uniqid() . '.' . $data['photo']->extension();
+        // $data['photo']->move(public_path('ProfilePhoto'), $userPhoto);
         $user = User::create([
             'user_type' => $data['userType'],
-            'name' => $data['name'],
+            // 'name' => $data['name'],
             'email' => $data['email'],
-            'profile_image' => $userPhoto,
+            // 'profile_image' => $userPhoto,
             'password' => Hash::make($data['password']),
         ]);
 
         if ($user->user_type == RegistrationTypeEnum::Intern) {
-            $this->redirectTo = "/intern";
+            $this->redirectTo = "/intern/create";
         }
         if ($user->user_type == RegistrationTypeEnum::Organization){
-            $this->redirectTo = "/organization";
+            $this->redirectTo = "/organization/create";
         }
         return $user;
     }

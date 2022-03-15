@@ -17,17 +17,20 @@ class CreateProposelsTable extends Migration
             $table->id();
             $table->text('reason');
             $table->string('available_time');
-            $table->unsignedBigInteger('intern_id')->nullable();     
-            $table->unsignedBigInteger('internship_id')->nullable();
+            $table->enum('status', ['Applied', 'Apply', 'Active'])->default('Apply');
+            
+            $table->foreignId('intern_id')
+                ->nullable()
+                ->constrained('interns')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('internship_id')
+                ->nullable()
+                ->constrained('internships')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->timestamps();
-
-            $table->foreign('internship_id')
-            ->references('id')->on('internships')
-            ->onDelete('cascade');
-
-            $table->foreign('intern_id')
-            ->references('id')->on('interns')
-            ->onDelete('cascade');
         });
     }
 

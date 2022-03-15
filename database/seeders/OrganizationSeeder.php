@@ -16,17 +16,6 @@ class OrganizationSeeder extends Seeder
      */
     public function run()
     {
-        Organization::factory()->count(100)->create()
-        ->each(function ($organization){
-            Internship::factory()->count(rand(1,4))->create([
-                'organization_id'=>$organization->id
-            ])
-            ->each(function($internship){
-                Proposel::factory()->count(rand(1,8))->create([
-                    'internship_id'=>$internship->id,
-                    'intern_id'=>$internship->id
-                ]);
-            });
-        });
+        
     }
 }

@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <link rel="stylesheet" id="css-main" href="{{asset ('/css/codebase.min-4.3.css')}}">
     <!-- Styles -->
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     

@@ -22,12 +22,12 @@
 
             <a class="img-link" href="javascript:void(0)" style="margin-top:30px">
 
-                <img class="img-avatar" src="http://source.unsplash.com/random/200x201" alt="Your Photo">
+                <img class="img-avatar" src="{{ asset('ProfilePhoto/'.auth()->user()->intern->profile_image) }}" alt="Your Photo">
 
             </a>
             <ul class="list-inline mt-10">
                 <li class="list-inline-item">
-                    <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="javascript:void(0)">{{auth()->user()->name}}</a>
+                    <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="javascript:void(0)">{{auth()->user()->intern->first_name}} {{auth()->user()->intern->last_name}}</a>
                 </li>
             </ul>
 
@@ -37,7 +37,7 @@
 
             <ul class="nav-main">
                 <li>
-                    <a class="active" href=""><i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                    <a class="active" href="/intern/dashboard"><i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Dashboard</span></a>
                 </li>
                 <li class="nav-main-heading"><span class="sidebar-mini-visible">MG</span><span class="sidebar-mini-hidden">Manage</span></li>
                 <li>
@@ -80,6 +80,19 @@
                         </li>
                         <li>
                             <a href="/intern/internships"><i class="far fa-user"> </i>Find Internships</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    @if(!auth()->user()->intern_id)
+                    <a href="/intern/task" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Tasks</span></a>
+                    @else
+                    <a href="/intern/task" class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-user"> </i> <span class="sidebar-mini-hide">Add Tasks</span></a>
+                    @endif
+                    <ul>
+                       
+                        <li>
+                            <a href="/intern/task"><i class="far fa-user"> </i>Add Tasks</a>
                         </li>
                     </ul>
                 </li>

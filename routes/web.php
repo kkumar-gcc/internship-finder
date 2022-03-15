@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\demoControllers;
-// use App\Http\Controllers\InternshipController;
+use App\Http\Controllers\Organization\InternshipController;
 use App\Http\Controllers\Organization\OrganizationController;
 use App\Http\Controllers\ProposelController;
 use App\Http\Controllers\ResetPasswordController;
@@ -58,13 +58,18 @@ Route::group(['middleware' => ['user_type','auth',]], function () {
             Route::get('/internships/manage/{token}', [App\Http\Controllers\Intern\InternController::class, 'internshipsManage']);
             Route::get('/apply/{internName}/{token}', [ProposelController::class, 'applyForm']);
             Route::post('/proposel/{internName}/{token}', [ProposelController::class, 'store']);
-
+           
+            Route::get('task',[App\Http\Controllers\Intern\HistoryController::class,'index']);
+            Route::post('task/create',[App\Http\Controllers\Intern\HistoryController::class,'store']);
+            Route::post('task/update/{token}',[App\Http\Controllers\Intern\HistoryController::class,'updateHistory']);
+            Route::delete('task/delete/{token}',[App\Http\Controllers\Intern\HistoryController::class,'destroy']);
+            
         });
 
         Route::get('/create', [App\Http\Controllers\Intern\InternController::class, 'create']);
         Route::post('/create/profile', [App\Http\Controllers\Intern\InternController::class, 'store']);
-        Route::get('/intern/edit{id}', [App\Http\Controllers\Intern\InternController::class, 'editIntern']);
-        Route::put('/intern/update{id}', [App\Http\Controllers\Intern\InternController::class, 'updateIntern']);
+        Route::get('/edit{id}', [App\Http\Controllers\Intern\InternController::class, 'editIntern']);
+        Route::put('/update{id}', [App\Http\Controllers\Intern\InternController::class, 'updateIntern']);
 
     });
 
@@ -77,18 +82,22 @@ Route::group(['middleware' => ['user_type','auth',]], function () {
         'middleware' => 'can:isOrganization',
         'as' => 'organization.'
     ], function () {
-        // Route::group(['middleware' => ['isOrganizationComplete']], function () {
+        Route::group(['middleware' => ['isOrganizationComplete']], function () {
 
         Route::get('dashboard', [OrganizationController::class, 'index']);
         Route::get('/create-staff',[OrganizationController::class, 'create']);
         Route::get('/interns', [OrganizationController::class, 'interns']);
-        Route::get('/organization/internships/',[OrganizationController::class, 'internships']);
-        Route::get('/organization/internship/{token}/proposels',[OrganizationController::class,'internProposels']);
-        Route::get('/organization/internship/{token}/proposels/{id}',[OrganizationController::class,'internProposel']);
-        
-    // });
+        Route::get('/internships',[OrganizationController::class, 'internships']);
+        Route::get('/internship/{token}/proposels',[OrganizationController::class,'internProposels']);
+        Route::get('/internship/{token}/proposels/{id}',[OrganizationController::class,'internProposel']);
+        Route::get('/internship/create',[InternshipController::class, 'index']);
+        Route::post('/internship/create/post',[InternshipController::class, 'store']);
+    });
 
-        Route::get('/create',[OrganizationController::class, 'create']);
+        // Route::get('/create',[OrganizationController::class, 'create']);
+        Route::get('/create', [OrganizationController::class, 'create']);
+        Route::post('/create/profile', [OrganizationController::class, 'store']);
+     
     });
 });
 

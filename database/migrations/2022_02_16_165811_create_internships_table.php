@@ -15,15 +15,28 @@ class CreateInternshipsTable extends Migration
     {
         Schema::create('internships', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('organization_id')->nullable();
+            $table->foreignId('organization_id')
+                ->nullable()
+                ->constrained('organizations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->string('title');
-            // $table->boolean('status');
+            $table->text('description');
+            $table->string('email');
+            $table->string('phoneNumber');
+            $table->string('category');
+            $table->string('internship_type');
+            $table->string('designation');
+            $table->float('salary');
+            $table->string('qualification');
+            $table->string('skills');
+            $table->date('lastdate');
+            $table->string('location');
+            $table->string('city');
+            $table->string('zipcode');
+            // $table->string('country');
             $table->timestamps();
-
-            $table->foreign('organization_id')
-            ->references('id')->on('organizations')
-            ->onDelete('cascade');
-
 
         });
     }

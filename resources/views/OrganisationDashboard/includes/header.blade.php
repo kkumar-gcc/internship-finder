@@ -27,7 +27,7 @@
         <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-user-md d-sm-none"></i>
 
-          <span class="d-none d-sm-inline-block">{{auth()->user()->name}}</span>
+          <span class="d-none d-sm-inline-block">{{auth()->user()->organization->name}}</span>
 
           <i class="fa fa-angle-down ml-5"></i>
         </button>

@@ -3,14 +3,13 @@
 
 @section('content')
 <section class="section">
-    <div class="container">
+    <div class="profile-container">
         <div class="row">
-            <div class="col-lg-8">
-                <div class="card job-detail overflow-hidden">
+            <div class="col-lg-8 profile-left">
+                <div class="card ">
                     <div>
-                        <img src="assets/images/job-detail.jpg" alt="" class="img-fluid">
                         <div class="job-details-compnay-profile">
-                            <img src="{{asset ('ProfilePhoto')}}/i{{$internship->id}}.jpg" alt="" class="img-fluid rounded-3 rounded-3">
+                            <img src="{{asset ('ProfilePhoto')}}/i{{$internship->id}}.jpg" alt="" style="width: 100%; height:300px;" class="rounded-3">
                         </div>
                     </div>
                     <div class="card-body p-4">
@@ -214,7 +213,7 @@
 
             </div><!--end col-->
 
-            <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="col-lg-4 profile-right">
                 <!--start side-bar-->
                 <div class="side-bar ms-lg-4">
                     <div class="card job-overview">
@@ -286,7 +285,7 @@
                                 </li>
                             </ul>
                             <div class="mt-3">
-                                <a href="/intern/apply/{{Str::slug($internship->title) }}/{{ $internship->id }}" data-bs-toggle="modal" class="btn btn-primary btn-hover w-100 mt-2">Apply Now <i class="uil uil-arrow-right"></i></a>
+                                <a href= "{{ $proposel->status != 'Apply' ? '/intern/internships/manage/'.auth()->user()->intern->id:'/intern/apply/'.Str::slug($internship->title).'/'.$internship->id  }}"  class="btn  btn-hover w-100 mt-2 {{$proposel->status != 'Apply' ? 'bg-soft-success' : 'btn-primary' }}">{{ $proposel->status }} <i class="uil uil-arrow-right"></i></a>
                                 <a href="bookmark-jobs.html" class="btn btn-soft-warning btn-hover w-100 mt-2"><i class="uil uil-bookmark"></i> Add Bookmark</a>
                             </div>
                         </div><!--end card-body-->

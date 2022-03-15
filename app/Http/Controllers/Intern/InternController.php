@@ -11,6 +11,7 @@ use App\Models\Intern;
 use App\Models\Internship;
 use App\Models\Organization;
 use App\Models\Proposel;
+use stdClass;
 
 class InternController extends Controller
 {
@@ -37,6 +38,7 @@ class InternController extends Controller
 
     public function store(Request $request)
     {
+
         $formData = $request->all();
         try {
             $intern =  (new InternCommand())->newIntern($formData);
@@ -64,7 +66,7 @@ class InternController extends Controller
         try {
             $intern = (new InternCommand())->updateIntern($formData, $id);
             session()->flash('status', 'Profile updated succesfully');
-            return redirect('/intern-dashboard');
+            return redirect('/intern/dashboard');
         } catch (\Throwable $th) {
             return response()->json($th->getMessage());
         }
@@ -88,8 +90,10 @@ class InternController extends Controller
     }
     public function internships()
     {
+
         $internships = Internship::paginate($perPage = 10, $columns = ['*'], $pageName = 'internships');
-        // dd($organizations);
+
+        // dd($internships);
         return view('InternDashboard/internship.findInternship')
             ->with('internships', $internships);
     }
@@ -97,8 +101,18 @@ class InternController extends Controller
     {
         $internship = Internship::where('id', $token)->first();
 
+        $proposelStatus = new stdClass();
+        $proposel = Proposel::where('intern_id', auth()->user()->intern->id)->where('internship_id', $token)->first();
+        if ($proposel) {
+            $proposelStatus = $proposel;
+        } else {
+            $proposelStatus->status = 'Apply';
+        }
         return view('InternDashboard.internshipProfile')
-            ->with(['internship' => $internship]);
+            ->with([
+                'internship' => $internship,
+                'proposel' => $proposelStatus
+            ]);
     }
 
     public function internshipsManage($token)
@@ -106,7 +120,7 @@ class InternController extends Controller
         // dd($token);
         // dd(auth()->user()->id,auth()->user()->intern->id);
         $proposels = Proposel::where('intern_id', $token)->paginate($perPage = 5, $columns = ['*'], $pageName = 'proposels');
-// dd($proposels);
+        // dd($proposels);
         return view('InternDashboard.internship.manageInternships')
             ->with(['proposels' => $proposels]);
     }

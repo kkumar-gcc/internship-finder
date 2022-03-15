@@ -14,8 +14,18 @@ class CreateInternToInternshipTable extends Migration
     public function up()
     {
         Schema::create('intern_to_internship', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('intern_id')->nullable();
+            $table->unsignedBigInteger('internship_id')->nullable();
             $table->timestamps();
+            $table->primary(['intern_id','internship_id']);
+        
+            $table->foreign('intern_id')
+            ->references('id')->on('interns')
+            ->onDelete('cascade');
+
+            $table->foreign('internship_id')
+                ->references('id')->on('internships')
+                ->onDelete('cascade');
         });
     }
 

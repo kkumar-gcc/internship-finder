@@ -4,6 +4,7 @@ namespace App\CommandClass;
 
 use App\Models\Address;
 use App\Models\Intern;
+use App\Models\Internship;
 use App\Models\Proposel;
 
 ;
@@ -18,17 +19,24 @@ class ProposelCommand
 
         $rules = [
             'reason' => ['required'],
-            'available_time' => ['required']
+            'available_time' => ['required'],
+    
         ];
 
         $validator = Validator::make($formData, $rules);
-        if ($validator->fails()) {
+        $proposelcheck = Proposel::where('intern_id', auth()->user()->intern->id)->where('internship_id', $formData['internshipId'])->first();
+       
+        if (($validator->fails())||($proposelcheck)) {
             return ['success' => false, 'data' => $validator->errors(), 400];
         }
-
+        
         //save a new intern
         $proposel = new Proposel();
         $this->saveProposelData($formData, $proposel);
+
+        // $internship=Internship::find($formData['internshipId']);
+        // $internship->interns()->attach(auth()->user()->intern->id);
+        
         return ['success' => true, 'data' => $proposel];
     }
 
@@ -68,8 +76,9 @@ class ProposelCommand
         $proposel->reason = $formData['reason'];
         $proposel->available_time = $formData['available_time'];
         $proposel->internship_id = $formData['internshipId'];
+        $proposel->status=$formData['status'];
         $proposel->save();
-
+        
         //save and intern address
         // $address = new Address();
         // $address->house_number = $formData['house_number'];

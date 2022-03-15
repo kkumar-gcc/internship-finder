@@ -22,12 +22,12 @@
 
             <a class="img-link" href="javascript:void(0)" style="margin-top:30px">
 
-                <img class="img-avatar" src="http://source.unsplash.com/random/200x201" alt="Your Photo">
+                <img class="img-avatar" src="{{ asset('ProfilePhoto/'.auth()->user()->organization->profile_image) }}" alt="Your Photo">
 
             </a>
             <ul class="list-inline mt-10">
                 <li class="list-inline-item">
-                    <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="javascript:void(0)">{{Auth::user()->name}}</a>
+                    <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="javascript:void(0)">{{auth()->user()->organization->name}}</a>
                 </li>
             </ul>
 
