@@ -100,12 +100,7 @@
                             </div>
                         </div>
                         <!--end card-body-->
-                        <div class="card-body p-4 border-top">
-                            <h6 class="fs-17 fw-medium mb-4">Company Location</h6>
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1628067715234!5m2!1sen!2sin"
-                                style="width:100%" allowfullscreen="" loading="lazy" height="250"></iframe>
-                        </div>
+                     
                     </div>
                     <!--end card-->
                 </div>
@@ -116,7 +111,7 @@
                         <div class="card-body p-4">
 
                             <div class="mb-5">
-                                <h6 class="fs-17 fw-medium mb-4">About Company</h6>
+                                <h6 class=" mb-4">About Company</h6>
                                 <p class="text-muted"> Objectively pursue diverse catalysts for change for interoperable
                                     meta-services. Distinctively re-engineer
                                     revolutionary meta-services and premium architectures. Intrinsically incubate intuitive
@@ -137,7 +132,7 @@
 
 
                             <div>
-                                <h6 class="fs-17 fw-medium mb-4">Current Opening</h6>
+                                <h6 class="mb-4">Current Opening</h6>
                                 @foreach ($organization->internships as $internship)
                                     <div class="internship-card card mt-4">
                                         <div>

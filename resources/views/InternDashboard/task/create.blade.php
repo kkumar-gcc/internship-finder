@@ -185,7 +185,7 @@
 
   <script type="text/javascript">
        
-        $('.ckeditor').ckeditor();
+        // $('.ckeditor').ckeditor();
         function showTaskForm() {
             document.querySelector('#createError').style.display = 'none';;
             document.querySelector('#taskForm').style.display = 'block';;

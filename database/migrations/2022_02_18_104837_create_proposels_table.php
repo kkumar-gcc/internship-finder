@@ -17,7 +17,7 @@ class CreateProposelsTable extends Migration
             $table->id();
             $table->text('reason');
             $table->string('available_time');
-            $table->enum('status', ['Applied', 'Apply', 'Active'])->default('Apply');
+            $table->enum('status', ['Applied', 'Apply', 'Active','Rejected','Blocked'])->default('Apply');
             
             $table->foreignId('intern_id')
                 ->nullable()

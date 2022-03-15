@@ -101,9 +101,16 @@ class ProposelController extends Controller
      * @param  \App\Models\Proposel  $proposel
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProposelRequest $request, Proposel $proposel)
+    public function update(UpdateProposelRequest $request,int $internship,int $token)
     {
-        //
+        $formData = $request->all();
+        try {
+            $proposel = (new ProposelCommand())->updateStatus($formData, $token);
+            session()->flash('status', 'Status updated succesfully');
+            return redirect('/organization/internship/'.$internship.'/proposels/'.$token);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage());
+        }
     }
 
     /**

@@ -67,7 +67,17 @@
                         </li>
                     </ul>
                 </li>
-
+                <li>
+                    <a class="nav-submenu" data-toggle="nav-submenu" href=""><i class="fa fa-building"></i><span class="sidebar-mini-hide">Internships</span></a>
+                    <ul>
+                        <li>
+                            <a href="/organization/internship/create">Create Internship</a>
+                        </li>
+                        <li>
+                            <a href="/organization/internships">Manage Internship</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-main-heading"><span class="sidebar-mini-visible">ST</span><span class="sidebar-mini-hidden">Contact Us</span></li>
                 <li>
                     <a href=""><i class="fa fa-pencil"></i><span class="sidebar-mini-hide"><i class="fas fa-envelope"> </i> Message Admin</span></a>

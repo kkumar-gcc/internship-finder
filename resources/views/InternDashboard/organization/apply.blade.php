@@ -22,7 +22,7 @@
                                     </div>
 
                                     <div class="cover_letter_container">
-                                        <textarea name="reason" class="textarea form-control @error('reason') is-invalid @enderror"
+                                        <textarea name="reason" class="form-control @error('reason') is-invalid @enderror"
                                             placeholder="{{ auth()->user()->name }}, employers see the answer to this question even before they view your resume. Answer this question carefully and add relevant information like your skills/experience and why you find the role exciting."
                                             {{ $proposel->status != 'Apply' ? 'disabled' : '' }}>{{ $proposel->status != 'Apply' ? $proposel->reason :old('reason') }}</textarea>
                                         
@@ -45,7 +45,7 @@
                                             time, specify the number of hours you can spend on this internship every day.
                                         </label>
                                     </div>
-                                    <textarea name="available_time" id="text_3273911" class="textarea form-control @error('available_time') is-invalid @enderror"
+                                    <textarea name="available_time" id="text_3273911" class="form-control @error('available_time') is-invalid @enderror"
                                         placeholder="e.g. I am available full time in Pune for the next 6 months, but will have exams for 15 days in June."
                                         aria-required="true"
                                         {{ $proposel->status != 'Apply' ? 'disabled' : '' }}>{{ $proposel->status != 'Apply' ? $proposel->available_time :old('available_time') }}</textarea>

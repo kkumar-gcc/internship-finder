@@ -90,11 +90,13 @@ Route::group(['middleware' => ['user_type','auth',]], function () {
         Route::get('/internships',[OrganizationController::class, 'internships']);
         Route::get('/internship/{token}/proposels',[OrganizationController::class,'internProposels']);
         Route::get('/internship/{token}/proposels/{id}',[OrganizationController::class,'internProposel']);
+       
         Route::get('/internship/create',[InternshipController::class, 'index']);
         Route::post('/internship/create/post',[InternshipController::class, 'store']);
+        Route::post('/proposel/{internship}/{token}', [ProposelController::class, 'update']);
     });
-
-        // Route::get('/create',[OrganizationController::class, 'create']);
+    
+        //Route::get('/create',[OrganizationController::class, 'create']);
         Route::get('/create', [OrganizationController::class, 'create']);
         Route::post('/create/profile', [OrganizationController::class, 'store']);
      

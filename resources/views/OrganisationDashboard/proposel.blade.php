@@ -1,52 +1,126 @@
 @extends('layouts.organisationDashboard')
 
 @section('content')
-<div class="candidate-list-box card mt-4">
-    <div class="card-body p-4">
-        <div class="row align-items-center">
-            <div class="col-auto">
-                <div class="candidate-list-images">
-                    <a href="javascript:void(0)"><img src="{{ asset('ProfilePhoto') }}/i{{ $proposel->id % 26 }}.jpg" alt="" style="width: 100px; height:100px;"
-                            class="avatar-md img-thumbnail rounded-circle"></a>
+    {{-- Modal to read cover letter  --}}
+    <div class="modal fade rounded-5" id="proposelCRead-{{ $proposel->id }}" tabindex="-1"
+        aria-labelledby="proposelReadLabel-{{ $proposel->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">COVER LETTER</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="task-container">
+                        <div class="task-content">
+                            {{ $proposel->reason }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
-            <!--end col-->
+        </div>
+    </div>
 
-            <div class="col-lg-5">
-                <div class="candidate-list-content mt-3 mt-lg-0">
-                    <h5 class="fs-19 mb-0"><a href="/organization/internship/{{ $proposel->internship->id}}/proposels/{{ $proposel->id}}" class="primary-link">{{ $proposel->intern->first_name}}</a> <span class="badge bg-success ms-1"><i
-                                class="mdi mdi-star align-middle"></i> 4.8</span></h5>
-                    <p class="text-muted mb-2"> Project Manager</p>
-                    <ul class="list-inline mb-0 text-muted">
-                        <li class="list-inline-item">
-                            <i class="mdi mdi-map-marker"></i> Oakridge Lane Richardson
-                        </li>
-                        <li class="list-inline-item">
-                            <i class="uil uil-wallet"></i> $650 / hours
-                        </li>
-                    </ul>
+  {{-- Modal to read available time --}}
+  <div class="modal fade rounded-5" id="proposelARead-{{ $proposel->id }}" tabindex="-1"
+    aria-labelledby="proposelReadLabel-{{ $proposel->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="">AVAILABLE TIME</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="task-container">
+                    <div class="task-content">
+                        {{ $proposel->available_time }}
+                    </div>
                 </div>
             </div>
-            <!--end col-->
-
-          
-        </div>
-        <!--end row-->
-        <h2>{{ $proposel->internship->organization->organization_name }}</h2>
-        <div class="mb-4 mt-4">
-            <h3>Cover latter</h3>
-            <p class="mt-4">{{ $proposel->reason }}</p>
-
-        </div>
-        <div class="mb-4 mt-4">
-            <h3>Available-time</h3>
-            <p class="mt-4">{{ $proposel->available_time}}</p>
-
-        </div>
-
-        <div class="favorite-icon">
-            <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
+
+
+    {{-- modal for selecting user status --}}
+    <div class="modal fade" id="proposel-{{ $proposel->id }}" tabindex="-1"
+        aria-labelledby="proposelLabel-{{ $proposel->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/organization/proposel/{{ $proposel->internship->id }}/{{ $proposel->id }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    {{-- {{ method_field('delete') }} --}}
+
+                    <div class="modal-body">
+                        <label for="userStatusModal" class="form-label">Select status of intern</label>
+                        <select class="form-select" id="userStatusModal" name="status">
+                            <option value="Rejected">Reject</option>
+                            <option value="Active" selected>Accept</option>
+                            <option value="Blocked">Block</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                        <button type="submit" class="btn btn-success">YES</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container card mt-4">
+        <div class="card-body p-4">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <div class="candidate-list-images">
+                        <a href="javascript:void(0)"><img
+                                src="{{ asset('ProfilePhoto/' . $proposel->intern->profile_image) }}" alt=""
+                                style="width: 60px; height:60px;" class="avatar-md img-thumbnail rounded-circle"></a>
+                    </div>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-5">
+                    <div class="candidate-list-content mt-3 mt-lg-0">
+                        <h5 class="fs-19 mb-0"><a
+                                href="/organization/internship/{{ $proposel->internship->id }}/proposels/{{ $proposel->id }}"
+                                class="primary-link">{{ $proposel->intern->first_name }}</a> </h5>
+
+                    </div>
+                </div>
+                <!--end col-->
+
+
+            </div>
+            <table class="table mt-10">
+                <thead>
+                    <tr>
+                        <th scope="col">Cover letter</th>
+                        <th scope="col">Available time</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> <button class="bedge btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#proposelCRead-{{ $proposel->id }}">Read</button> </td>
+                        <td> <button class="bedge btn btn-primary" data-bs-toggle="modal"
+                          data-bs-target="#proposelARead-{{ $proposel->id }}">Read</button></td>
+                        <td><button class="bedge btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#proposel-{{ $proposel->id }}">{{ $proposel->status }}</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection

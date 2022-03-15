@@ -138,7 +138,7 @@
                         <!--end col-->
                         <div class="col-lg-12">
                             <div class="text-end">
-                                <a href="back()" class="btn btn-success">Back</a>
+                                <a href="{{ url()->previous() }}" class="btn btn-success">Back</a>
                                 <button class="btn btn-primary" type="submit">Post Now <i
                                         class="mdi mdi-send"></i></button>
                             </div>

@@ -36,7 +36,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-16158021-6"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-        
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <main>
       @yield('styleLink')
   </main>
@@ -45,10 +45,10 @@
 <body>
     <div id="page-container"
         class="sidebar-o enable-page-overlay side-scroll page-header page-header-modern main-content-boxed">
-        @include('OrganisationDashboard/includes.header');
+        @include('OrganisationDashboard/includes.header')
 
         <nav id="sidebar">
-            @include('OrganisationDashboard/includes.sidebar');
+            @include('OrganisationDashboard/includes.sidebar')
         </nav>
 
         <main id="main-container" style="margin-bottom: 20px;">

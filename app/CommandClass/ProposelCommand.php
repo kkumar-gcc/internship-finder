@@ -40,33 +40,22 @@ class ProposelCommand
         return ['success' => true, 'data' => $proposel];
     }
 
-    // public function updateIntern(array $formData, int $id)
-    // {
+    public function updateStatus(array $formData, int $id)
+    {
+        $rules = [  
+            'status' => ['required'],
+        ];
 
-    //     $rules = [
-    //         'first_name' => ['required'],
-    //         'last_name' => ['required'],
-    //         'other_name' => ['required'],
-    //         'gender' => ['required'],
-    //         'phone' => ['required'],
-    //         'date_of_birth' => ['required'],
+        $validator = Validator::make($formData, $rules);
+        if ($validator->fails()) {
+            return ['success' => false, 'data' => $validator->errors(), 400];
+        }
 
-    //         'area_of_interest' => ['required'],
-    //  'house_number' => ['required'],
-    //         'city' => ['required'],
-    //         'state' => ['required'],
-    //         'country' => ['required'],
-    //     ];
-
-    //     $validator = Validator::make($formData, $rules);
-    //     if ($validator->fails()) {
-    //         return ['success' => false, 'data' => $validator->errors(), 400];
-    //     }
-
-    //     $intern = Intern::find($id);
-    //     $this->saveProposelData($formData, $intern);
-    //     return ['success' => false, 'data' => $intern];
-    // }
+        $proposel = Proposel::find($id);
+       $proposel->status=$formData['status'];
+       $proposel->save();
+        return ['success' => false, 'data' => $proposel];
+    }
 
     public function saveProposelData($formData, $proposel)
     {
@@ -78,17 +67,5 @@ class ProposelCommand
         $proposel->internship_id = $formData['internshipId'];
         $proposel->status=$formData['status'];
         $proposel->save();
-        
-        //save and intern address
-        // $address = new Address();
-        // $address->house_number = $formData['house_number'];
-        // $address->city = $formData['city'];
-        // $address->state = $formData['state'];
-        // $address->country = $formData['country'];
-        // $address->save();
-
-        //update intern address
-        // $intern->address_id = $address->id;
-        // $proposel->save();
     }
 }
