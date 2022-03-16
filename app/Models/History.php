@@ -11,9 +11,17 @@ class History extends Model
     protected $fillable = [
         'title',
         'description',
+        'owner',
+        'user_id',
+        'proposel_id'
     ];
-    public function intern()
+    public function user()
     {
-        return $this->belongsTo(Intern::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function proposel()
+    {
+        return $this->belongsTo(Internship::class);
     }
 }

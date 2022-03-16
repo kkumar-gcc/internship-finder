@@ -54,10 +54,12 @@ class HistoryCommand
 
     public function saveHistoryData($formData, $history)
     {
-        $loggedInUserId = Auth()->user()->intern->id;
-        $history->intern_id = $loggedInUserId;
+        $loggedInUserId = Auth()->user()->id;
+        $history->user_id = $loggedInUserId;
         $history->title = $formData['title'];
+        $history->proposel_id=$formData['proposelId'];
         $history->description=$formData['description'];
+        $history->owner=$formData['owner'];
         $history->save();
     }
 }

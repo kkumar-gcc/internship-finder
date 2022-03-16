@@ -28,99 +28,81 @@
                     </div>
                 </div>
             @else
-                <div class="row align-items-center">
-                    <div class="col-lg-8">
-                        <div class="mb-4 mb-lg-0">
-                            <h6 class="mb-0"> My Job Listings </h6>
-                        </div>
+                <div class="">
+                    <div class="m-4 mb-lg-0">
+                        <h2 class="text-center"> My Job Listings </h2>
                     </div>
-                    <!--end col-->
-
                 </div>
-                <!--end row-->
-                <div class="row">
-                    @foreach ($proposels as $proposel)
-                        <div class="col-lg-12">
 
-                            <div class="job-box card mt-4">
-                                <div class="card-body p-4">
-                                    <div class="row">
-                                        <div class="col-lg-1">
-                                            <a href="company-details.html"><img
-                                                    src="{{ asset('ProfilePhoto') }}/i{{ $proposel->id % 26 }}.jpg"
-                                                    alt="" class="img-fluid rounded-3"></a>
-                                        </div>
-                                        <!--end col-->
-                                        <div class="col-lg-9">
-                                            <div class="mt-3 mt-lg-0">
-                                                <h5 class="fs-17 mb-1"><a href="job-details.html"
-                                                        class="text-dark">Project Manager</a> <small
-                                                        class="text-muted fw-normal">(0-2 Yrs Exp.)</small></h5>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item">
-                                                        <p class="text-muted fs-14 mb-0">
-                                                            {{ $proposel->internship->organization->organization_name }}
-                                                        </p>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i>
-                                                            California</p>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i> $250
-                                                            -
-                                                            $800 / month</p>
-                                                    </li>
-                                                </ul>
-                                                <div class="mt-2">
-                                                    <span class="badge bg-soft-success   mt-1 p-2">Full Time</span>
-                                                    <span class="badge bg-soft-warning  mt-1 p-2">Urgent</span>
-                                                    <span class="badge bg-soft-info  p-2 mt-1">Private</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--end col-->
-                                        <button class="mt-10 w-40 {{ $proposel->status=='Applied'?'bg-soft-warning':'bg-soft-success' }}">{{$proposel->status }}</button>
-                                        <div class="col-lg-2 align-self-center">
-                                            <ul class="list-inline mt-3 mb-0">
-                                                <li class="list-inline-item" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="" data-bs-original-title="Edit">
-                                                    <a href="manage-jobs-post.html"
-                                                        class="avatar-sm bg-success text-center rounded-circle fs-18">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="" data-bs-original-title="Delete">
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal"
-                                                        class="avatar-sm bg-danger d-inline-block text-center rounded-circle fs-18">
-                                                        <i class="uil uil-trash-alt"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <!--end col-->
-                                    </div>
-                                    <!--end row-->
-                                </div>
-                            </div>
-                            <!--end job-box-->
-                        </div>
-                        <!--end col-->
-                    @endforeach
+                <div class="table-responsive">
+
+                    <table class="table mt-10" style="font-size: 18px;font-weight:600;">
+                        <thead>
+                            <tr>
+                                <th scope="col">company</th>
+                                <th scope="col">profile</th>
+                                <th scope="col">Applied on</th>
+                                <th scope="col">Number of Applicants</th>
+                                <th scope="col">Application status</th>
+                                <th scope="col">Review Application</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($proposels as $proposel)
+                                {{-- href="/organization/internship/{{ $proposel->internship->id }}/proposels/{{ $proposel->id }}"
+                                               {{ $proposel->intern->first_name }}</a> </h5> --}}
+                                <tr>
+                                    <td><a href="/intern/organizations/{{ $proposel->internship->organization->id }}"
+                                            title="visit  '{{ $proposel->internship->organization->name }}'">{{ $proposel->internship->organization->name }}</a>
+                                    </td>
+                                    <td>{{ $proposel->internship->title }}<a
+                                            href="/intern/internships/{{ $proposel->internship->id }}"
+                                            title="visit  '{{ $proposel->internship->title }}'">
+                                            <x-go-link-external-16 class="w-5 h-5" />
+                                        </a></td>
+                                    <td>{{ date('d M Y H:i A', strtotime($proposel->created_at)) }}</td>
+                                    <td>{{ $proposel->internship->proposels->count() }}</td>
+                                    <td>
+                                        @if ($proposel->status == 'Blocked' || $proposel->status == 'Active')
+                                            <a href="/intern/internship/{{ $proposel->internship_id }}/dashboard/{{ $proposel->id }}"
+                                                class="btn btn-{{ $colors[$proposel->status] }}">internship dashboard</a>
+                                        @else
+                                            <span
+                                                class="badge badge-{{ $colors[$proposel->status] }}">{{ $proposel->status }}</span>
+                                        @endif
+                                    </td>
+                                    <td>review</td>
+                                    {{-- <td> <button class="bedge btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#proposelCRead-{{ $proposel->id }}">Read</button> </td>
+                                        <td> <button class="bedge btn btn-primary" data-bs-toggle="modal"
+                                          data-bs-target="#proposelARead-{{ $proposel->id }}">Read</button></td>
+                                        <td><button class="bedge btn btn-{{ $color }}" data-bs-toggle="modal"
+                                                data-bs-target="#proposel-{{ $proposel->id }}">{{ $proposel->status }}</button></td> --}}
+                                </tr>
+
+
+
+                                {{-- <a href="company-details.html"><img
+                                    src="{{ asset('ProfilePhoto') }}/i{{ $proposel->id % 26 }}.jpg" alt=""
+                                    class="img-fluid rounded-3"></a>
+
+                            {{ $proposel->internship->organization->name }} --}}
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                <!--end row-->
+        </div>
+        <!--end row-->
 
-                <div class="row">
-                    <div class="col-lg-12 mt-4 pt-2">
-                        <nav aria-label="Page navigation example p-4">
-                            {{ $proposels->onEachSide(5)->links() }}
-                        </nav>
-                    </div>
-                    <!--end col-->
-                </div><!-- end row -->
-            @endif
+        <div class="row">
+            <div class="col-lg-12 mt-4 pt-2">
+                <nav aria-label="Page navigation example p-4">
+                    {{ $proposels->onEachSide(5)->links() }}
+                </nav>
+            </div>
+            <!--end col-->
+        </div><!-- end row -->
+        @endif
         </div>
         <!--end container-->
     </section>

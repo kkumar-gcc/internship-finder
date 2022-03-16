@@ -36,7 +36,7 @@ Route::get('/demo', [demoControllers::class, 'index']);
 Auth::routes();
 
 
-Route::group(['middleware' => ['user_type','auth',]], function () {
+Route::group(['middleware' => ['user_type', 'auth',]], function () {
 
     /********************************
     |        intern routing          |
@@ -47,7 +47,7 @@ Route::group(['middleware' => ['user_type','auth',]], function () {
         'middleware' => 'can:isIntern',
         'as' => 'intern.'
     ], function () {
-       
+
         Route::group(['middleware' => ['isInternComplete']], function () {
 
             Route::get('dashboard', [App\Http\Controllers\Intern\InternController::class, 'index']);
@@ -58,19 +58,20 @@ Route::group(['middleware' => ['user_type','auth',]], function () {
             Route::get('/internships/manage/{token}', [App\Http\Controllers\Intern\InternController::class, 'internshipsManage']);
             Route::get('/apply/{internName}/{token}', [ProposelController::class, 'applyForm']);
             Route::post('/proposel/{internName}/{token}', [ProposelController::class, 'store']);
-           
-            Route::get('task',[App\Http\Controllers\Intern\HistoryController::class,'index']);
-            Route::post('task/create',[App\Http\Controllers\Intern\HistoryController::class,'store']);
-            Route::post('task/update/{token}',[App\Http\Controllers\Intern\HistoryController::class,'updateHistory']);
-            Route::delete('task/delete/{token}',[App\Http\Controllers\Intern\HistoryController::class,'destroy']);
-            
+
+
+            Route::get('/internship/{token}/dashboard/{proposel}', [App\Http\Controllers\Intern\InternController::class, 'internshipDashboard']);
+            Route::get('task/proposel/{token}', [App\Http\Controllers\Intern\HistoryController::class, 'index']);
+            Route::post('task/create', [App\Http\Controllers\Intern\HistoryController::class, 'store']);
+            Route::post('task/update/{token}', [App\Http\Controllers\Intern\HistoryController::class, 'updateHistory']);
+            Route::delete('task/delete/{token}', [App\Http\Controllers\Intern\HistoryController::class, 'destroy']);
+    
         });
 
         Route::get('/create', [App\Http\Controllers\Intern\InternController::class, 'create']);
         Route::post('/create/profile', [App\Http\Controllers\Intern\InternController::class, 'store']);
         Route::get('/edit{id}', [App\Http\Controllers\Intern\InternController::class, 'editIntern']);
         Route::put('/update{id}', [App\Http\Controllers\Intern\InternController::class, 'updateIntern']);
-
     });
 
     /*********************************
@@ -84,22 +85,28 @@ Route::group(['middleware' => ['user_type','auth',]], function () {
     ], function () {
         Route::group(['middleware' => ['isOrganizationComplete']], function () {
 
-        Route::get('dashboard', [OrganizationController::class, 'index']);
-        Route::get('/create-staff',[OrganizationController::class, 'create']);
-        Route::get('/interns', [OrganizationController::class, 'interns']);
-        Route::get('/internships',[OrganizationController::class, 'internships']);
-        Route::get('/internship/{token}/proposels',[OrganizationController::class,'internProposels']);
-        Route::get('/internship/{token}/proposels/{id}',[OrganizationController::class,'internProposel']);
-       
-        Route::get('/internship/create',[InternshipController::class, 'index']);
-        Route::post('/internship/create/post',[InternshipController::class, 'store']);
-        Route::post('/proposel/{internship}/{token}', [ProposelController::class, 'update']);
-    });
-    
+            Route::get('dashboard', [OrganizationController::class, 'index']);
+            Route::get('/create-staff', [OrganizationController::class, 'create']);
+            Route::get('/interns', [OrganizationController::class, 'interns']);
+            Route::get('/internships', [OrganizationController::class, 'internships']);
+            Route::get('/internship/{token}/proposels', [OrganizationController::class, 'internProposels']);
+            Route::get('/internship/{token}/proposels/{id}', [OrganizationController::class, 'internProposel']);
+
+            Route::get('/internship/create', [InternshipController::class, 'index']);
+            Route::post('/internship/create/post', [InternshipController::class, 'store']);
+            Route::post('/proposel/{internship}/{token}', [ProposelController::class, 'update']);
+        });
+
+        Route::get('/internship/{token}/dashboard/{proposel}', [App\Http\Controllers\Organization\OrganizationController::class, 'internshipDashboard']);
+
+        // Route::get('task/proposel/{token}', [App\Http\Controllers\Intern\HistoryController::class, 'index']);
+        Route::post('task/create', [App\Http\Controllers\Intern\HistoryController::class, 'store']);
+        Route::post('task/update/{token}', [App\Http\Controllers\Intern\HistoryController::class, 'updateHistory']);
+        Route::delete('task/delete/{token}', [App\Http\Controllers\Intern\HistoryController::class, 'destroy']);
+
         //Route::get('/create',[OrganizationController::class, 'create']);
         Route::get('/create', [OrganizationController::class, 'create']);
         Route::post('/create/profile', [OrganizationController::class, 'store']);
-     
     });
 });
 
@@ -117,10 +124,10 @@ Route::get('/reset-password/{token}', [App\Http\Controllers\ResetPasswordControl
 // Route::resource('staff', Staff\StaffController::class);
 
 
-Route::get('/searchIntern', [OrganizationController::class,'searchIntern']);
+Route::get('/searchIntern', [OrganizationController::class, 'searchIntern']);
 
-Route::get('/demo/searchIntern',[OrganizationController::class,'findIntern'])->name('demo/searchIntern');
+Route::get('/demo/searchIntern', [OrganizationController::class, 'findIntern'])->name('demo/searchIntern');
 
-Route::get('/profile',[OrganizationController::class,'profile']);
+Route::get('/profile', [OrganizationController::class, 'profile']);
 
 Route::get('/searchOrganization', [App\Http\Controllers\Intern\InternController::class, 'organizations']);

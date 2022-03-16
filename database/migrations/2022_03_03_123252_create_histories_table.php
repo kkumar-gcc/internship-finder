@@ -17,12 +17,18 @@ class CreateHistoriesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->unsignedBigInteger('intern_id')->nullable();     
-         
+            $table->string('owner');
+            $table->unsignedBigInteger('user_id')->nullable();    
+            $table->unsignedBigInteger('proposel_id')->nullable(); 
+           
             $table->timestamps();
             
-            $table->foreign('intern_id')
-            ->references('id')->on('interns')
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
+
+            $table->foreign('proposel_id')
+            ->references('id')->on('proposels')
             ->onDelete('cascade');
         });
     }

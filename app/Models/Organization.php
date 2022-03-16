@@ -39,4 +39,5 @@ class Organization extends Model
     {
         return $this->hasMany(Internship::class);
     }
+    
 }

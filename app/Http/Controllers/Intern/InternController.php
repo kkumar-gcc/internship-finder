@@ -7,6 +7,7 @@ use App\CommandClass\InternCommand;
 use App\Enums\CountryEnum;
 use App\Enums\GenderEnum;
 use App\Http\Controllers\Controller;
+use App\Models\History;
 use App\Models\Intern;
 use App\Models\Internship;
 use App\Models\Organization;
@@ -101,6 +102,7 @@ class InternController extends Controller
     {
         $internship = Internship::where('id', $token)->first();
 
+
         $proposelStatus = new stdClass();
         $proposel = Proposel::where('intern_id', auth()->user()->intern->id)->where('internship_id', $token)->first();
         if ($proposel) {
@@ -108,22 +110,38 @@ class InternController extends Controller
         } else {
             $proposelStatus->status = 'Apply';
         }
+
+        $colors = ["Apply" => "primary", "Applied" => "warning", "Active" => "success", "Blocked" => "secondary", "Rejected" => "danger"];
+        $color = $colors[$proposelStatus->status];
         return view('InternDashboard.internshipProfile')
             ->with([
                 'internship' => $internship,
-                'proposel' => $proposelStatus
+                'proposel' => $proposelStatus,
+                'color' => $color
             ]);
     }
 
     public function internshipsManage($token)
     {
-        // dd($token);
-        // dd(auth()->user()->id,auth()->user()->intern->id);
         $proposels = Proposel::where('intern_id', $token)->paginate($perPage = 5, $columns = ['*'], $pageName = 'proposels');
-        // dd($proposels);
+
+        $colors = ["Apply" => "primary", "Applied" => "warning", "Active" => "success", "Blocked" => "secondary", "Rejected" => "danger"];
+
         return view('InternDashboard.internship.manageInternships')
-            ->with(['proposels' => $proposels]);
+            ->with(['proposels' => $proposels, 'colors' => $colors]);
     }
+
+    public function internshipDashboard(int $token,int $proposel)
+    {
+        $histories = History::where('proposel_id',$proposel)->get();
+
+        // dd($histories);
+        $proposel = Proposel::where('internship_id', $token)->where('intern_id', auth()->user()->intern->id)->first();
+    
+        return view('InternDashboard.internshipDashboard.workspace')
+            ->with(['proposel' => $proposel, 'histories' => $histories]);
+    }
+
     public function searchOrganization(Request $request)
     {
         $request->flash();

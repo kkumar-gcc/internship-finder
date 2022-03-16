@@ -24,7 +24,8 @@ class Internship extends Model
         'location',
         'city',
         'zipcode',
-        'organization_id'
+        'organization_id',
+        'profile_image'
     ];
 
 

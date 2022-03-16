@@ -25,4 +25,8 @@ class Proposel extends Model
     {
         return $this->belongsTo(Intern::class);
     }
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
 }

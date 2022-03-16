@@ -5,9 +5,7 @@ namespace App\CommandClass;
 use App\Models\Address;
 use App\Models\Intern;
 use App\Models\Internship;
-use App\Models\Proposel;
-
-;
+use App\Models\Proposel;;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -20,29 +18,29 @@ class ProposelCommand
         $rules = [
             'reason' => ['required'],
             'available_time' => ['required'],
-    
+
         ];
 
         $validator = Validator::make($formData, $rules);
         $proposelcheck = Proposel::where('intern_id', auth()->user()->intern->id)->where('internship_id', $formData['internshipId'])->first();
-       
-        if (($validator->fails())||($proposelcheck)) {
+
+        if (($validator->fails()) || ($proposelcheck)) {
             return ['success' => false, 'data' => $validator->errors(), 400];
         }
-        
+
         //save a new intern
         $proposel = new Proposel();
         $this->saveProposelData($formData, $proposel);
 
         // $internship=Internship::find($formData['internshipId']);
         // $internship->interns()->attach(auth()->user()->intern->id);
-        
+
         return ['success' => true, 'data' => $proposel];
     }
 
     public function updateStatus(array $formData, int $id)
     {
-        $rules = [  
+        $rules = [
             'status' => ['required'],
         ];
 
@@ -52,8 +50,11 @@ class ProposelCommand
         }
 
         $proposel = Proposel::find($id);
-       $proposel->status=$formData['status'];
-       $proposel->save();
+        $intern = Intern::find($proposel->intern_id);
+        $intern->status = 'Active';
+        $intern->save();
+        $proposel->status = $formData['status'];
+        $proposel->save();
         return ['success' => false, 'data' => $proposel];
     }
 
@@ -65,7 +66,7 @@ class ProposelCommand
         $proposel->reason = $formData['reason'];
         $proposel->available_time = $formData['available_time'];
         $proposel->internship_id = $formData['internshipId'];
-        $proposel->status=$formData['status'];
+        $proposel->status = $formData['status'];
         $proposel->save();
     }
 }

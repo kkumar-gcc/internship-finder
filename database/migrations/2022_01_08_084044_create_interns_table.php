@@ -24,6 +24,7 @@ class CreateInternsTable extends Migration
             $table->date('date_of_birth');
             $table->string('area_of_interest');
             $table->string('profile_image');
+            $table->enum('status',['Not Active','Active'])->default('Not Active');
             $table->timestamps();
 
             $table->foreign('address_id')

@@ -40,10 +40,16 @@ class AuthServiceProvider extends ServiceProvider
              return $user->user_type == 'Organization';
          });
 
-        //  Gate::define('isApplied',function($user,$proposel){
+         Gate::define('isNotActive',function($user){
+            return $user->intern->status !='Active';
+         });
+         Gate::define('isActive',function($user){
+            return $user->intern->status =='Active';
+         });
 
-        //  })
-      
+       Gate::define('isOwner',function($user,$history){
+            return $history->owner==$user->user_type;
+         });
 
     }
 }

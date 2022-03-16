@@ -66,6 +66,14 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="custom-file form">
+                            {{-- <label for="re-listing-photos">Date of birth</label> --}}
+                            <input type="file"
+                                class="custom-file-input {{ $errors->has('photo') ? 'border-danger' : '' }}"
+                                id="re-listing-photos" name="photo" data-toggle="custom-file-input">
+                            <label class="custom-file-label" for="re-listing-photos">Choose Profile
+                                Image</label>
+                        </div>
                         <!--end col-->
                         <div class="col-lg-6">
                             <div class="mb-4">

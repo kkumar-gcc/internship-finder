@@ -21,11 +21,13 @@ class ProposelController extends Controller
     public function applyForm($internName, $token)
     {
         $internship = Internship::where('id', $token)->first();
-    
+       
         $proposelStatus=new stdClass();
+       
         $proposel = Proposel::where('intern_id', auth()->user()->intern->id)->where('internship_id', $token)->first();
            if($proposel){
                $proposelStatus=$proposel;
+              
            }
            else{
                $proposelStatus->status='Apply';
@@ -34,7 +36,8 @@ class ProposelController extends Controller
         return view('InternDashboard.organization.apply')
             ->with([
                 'internship' => $internship,
-                'proposel'=>$proposelStatus
+                'proposel'=>$proposelStatus,
+                
             ]);
     }
 

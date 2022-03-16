@@ -40,6 +40,11 @@ class InternshipController extends Controller
     {
         // dd(auth()->user()->organization->id);
         // dd($request['organization_id']);
+        // dd($request['photo']);
+        $internshipPhoto = "noimage.png";
+        $internshipPhoto = date('mdYHis') . uniqid() . '.' . $request['photo']->extension();
+        $request['photo']->move(public_path('ProfilePhoto'), $internshipPhoto);
+
         $internship = new Internship([
             'title' => $request['title'],
             'description' => $request['description'],
@@ -55,6 +60,7 @@ class InternshipController extends Controller
             'location' => $request['location'],
             'zipcode' => $request['zipcode'],
             'city' => $request['city'],
+            'profile_image' => $internshipPhoto,
             'organization_id' => $request['organization_id'],
         ]);
         // dd($internship);

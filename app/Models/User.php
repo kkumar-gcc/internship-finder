@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Organization::class);
     }
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
 }

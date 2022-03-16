@@ -1,7 +1,7 @@
 @extends('layouts.internDashboard')
 @section('style')
-<link href="ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
-{{-- <script src="ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script> --}}
+    <link href="ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
+    {{-- <script src="ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script> --}}
 
     <style>
         .task-edit-content ol li {
@@ -27,6 +27,7 @@
         {{ $error }}
     @endisset
     <div class="task-fluid-container">
+
         @if (count($histories) < 1)
             <div class="task-container " id="createError">
                 <div class="task-content">
@@ -47,6 +48,10 @@
                 <div class="task-content">
                     <form method="post" action="/intern/task/create" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="owner" value="{{ auth()->user()->user_type }}">
+                        <input type="hidden" name="internshipId" value="{{ $proposel->internship_id }}">
+                        <input type="hidden" name="proposelId" value="{{ $proposel->id }}">
+
                         <div class="form-group">
                             <input type="text" name="title" id="" placeholder="Title">
                         </div>
@@ -75,15 +80,17 @@
                                         <form method="post" action="/intern/task/update/{{ $history->id }}"
                                             enctype="multipart/form-data">
                                             @csrf
+
+                                            <input type="hidden" name="owner" value="{{ auth()->user()->user_type }}">
+
                                             <div class="form-group">
                                                 <input type="text" name="title" id="" placeholder="Title"
                                                     value="{{ $history->title }}">
                                             </div>
                                             <div class="form-group">
-                                                <textarea class="ckeditor form-control"
-                                                    name="description">{{ $history->description }}</textarea>
+                                                <textarea class="ckeditor form-control" name="description">{{ $history->description }}</textarea>
                                             </div>
-                                               <button type="submit" class="btn-success btn">Edit Task </button>
+                                            <button type="submit" class="btn-success btn">Edit Task </button>
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
 
@@ -131,52 +138,85 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="task-edit-container">
-                    <div class="task-edit-heading">
-                        <div class="row">
-                            <div class="col-lg-10">
-                                <h3> <strong> {{ $history->title }} </strong> created on
-                                    <span>{{ \Carbon\Carbon::parse($history->created_at)->format('j F, Y H:i') }}</span>
-                                </h3>
-                            </div>
-                            <div class="col-lg-2">
-                                <button type="button" class="task-btn" data-bs-toggle="modal"
-                                    data-bs-target="#editHistory-{{ $history->id }}">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" class="task-btn" data-bs-toggle="modal"
-                                    data-bs-target="#deleteHistory-{{ $history->id }}">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-
-                                {{-- <i class="fa-solid fa-ellipsis"></i> --}}
-                            </div>
+                <div class="task-main-container">
+                    <div class="task-profile-container">
+                        <div class="candidate-list-images">
+                           
+                            @if ($history->owner=='Intern')
+                            <a href=""><img src="{{ asset('ProfilePhoto/'.$history->user->intern->profile_image) }}" alt="" style="width: 50px; height:50px;"
+                                class="avatar-md img-thumbnail rounded-circle"></a>
+                            @elseif ($history->owner=='Organization')
+                            <a href=""><img src="{{ asset('ProfilePhoto/'.$history->user->organization->profile_image) }}" alt="" style="width: 50px; height:50px;"
+                                class="avatar-md img-thumbnail rounded-circle"></a>
+                         
+                            @endif
+                           
                         </div>
                     </div>
-                    <div class="task-edit-content">
-                        {!! $history->description !!}
+
+                    <div class="task-edit-container">
+                        <div class="task-edit-heading">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <h3> <strong> {{ $history->title }} </strong> created on
+                                        <span>{{ \Carbon\Carbon::parse($history->created_at)->format('j F, Y H:i') }}</span>
+                                    </h3><span class="badge badge-secondary"> {{ $history->status }} </span>
+                                </div>
+                                <div class="col-lg-2">
+                                    @can('isOwner', $history)
+                                        <button type="button" class="task-btn" data-bs-toggle="modal"
+                                            data-bs-target="#editHistory-{{ $history->id }}">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="task-btn" data-bs-toggle="modal"
+                                            data-bs-target="#deleteHistory-{{ $history->id }}">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    @endcan
+
+
+                                    {{-- <i class="fa-solid fa-ellipsis"></i> --}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-edit-content">
+                            {!! $history->description !!}
+                        </div>
                     </div>
                 </div>
             @endforeach
-            <div class="task-container">
-                <div class="task-content">
-                    <form method="post" action="/intern/task/create" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="owner" value="{{ auth()->user()->user_type }}">
-                        <div class="form-group">
-                            <input type="text" name="title" id="" placeholder="Title">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="ckeditor form-control" id="ckeditor" name="description"></textarea>
-                        </div>
-                       
-                        <button type="submit" class="btn-success btn"> Add Task </button>
+            <hr>
+            <div class="task-main-container">
+                <div class="task-profile-container">
+                    <div class="candidate-list-images">
+                        <a href=""><img src="{{ asset('ProfilePhoto/'.auth()->user()->intern->profile_image) }}" alt="" style="width: 50px; height:50px;"
+                                class="avatar-md img-thumbnail rounded-circle"></a>
+                    </div>
+                </div>
+                <div class="task-container">
+                    <div class="task-content">
 
-                    </form>
+                        <form method="post" action="/intern/task/create" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="internshipId" value="{{ $proposel->internship_id }}">
+                            <input type="hidden" name="proposelId" value="{{ $proposel->id }}">
+
+                            <input type="hidden" name="owner" value="{{ auth()->user()->user_type }}">
+                            <div class="form-group">
+                                <input type="text" name="title" id="" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="ckeditor form-control" id="ckeditor" name="description"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-success btn"> Add Task </button>
+
+                        </form>
+                    </div>
                 </div>
             </div>
-        @endif
+           
+            @endif
     </div>
 @endsection
 
@@ -184,8 +224,7 @@
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     {{-- <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script> --}}
 
-  <script type="text/javascript">
-       
+    <script type="text/javascript">
         // $('.ckeditor').ckeditor();
         function showTaskForm() {
             document.querySelector('#createError').style.display = 'none';;

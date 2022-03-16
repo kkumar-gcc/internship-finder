@@ -35,6 +35,7 @@ class CreateInternshipsTable extends Migration
             $table->string('location');
             $table->string('city');
             $table->string('zipcode');
+            $table->string('profile_image');
             // $table->string('country');
             $table->timestamps();
 

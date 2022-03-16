@@ -9,6 +9,7 @@ use App\Models\Internship;
 use App\Models\Proposel;
 use App\Enums\CountryEnum;
 use App\Enums\GenderEnum;
+use App\Models\History;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,15 +18,15 @@ class OrganizationController extends Controller
 {
     public function index()
     {
-        $demos=['one','two'];
-         $demos = (object)$demos;
+        $demos = ['one', 'two'];
+        $demos = (object)$demos;
         if (Auth()->check()) {
             return view('/OrganisationDashboard.home')
-            ->with('demos',$demos);
+                ->with('demos', $demos);
         }
         return redirect('/login');
     }
-    
+
     public function profile()
     {
         return view('/OrganisationDashboard.profile');
@@ -37,7 +38,6 @@ class OrganizationController extends Controller
         return view('OrganisationDashboard.profile.create')
             ->with('gender', $gender)
             ->with('country', $country);
-     
     }
 
 
@@ -47,10 +47,10 @@ class OrganizationController extends Controller
     public function store(Request $request)
     {
         $formData = $request->all();
-       
+
         try {
             $organization =  (new OrganizationCommand())->newOrganization($formData);
-            
+
             $request->session()->flash('status', "Profile created succesfully");
             return redirect('/organization/dashboard');
         } catch (\Throwable $th) {
@@ -89,26 +89,40 @@ class OrganizationController extends Controller
 
     public function internships()
     {
-        $internships=Internship::where('organization_id',auth()->user()->organization->id)->get();
-      
+        $internships = Internship::where('organization_id', auth()->user()->organization->id)->get();
+
         return view('OrganisationDashboard.internshipOrganization')
-        ->with(['internships'=>$internships]);
+            ->with(['internships' => $internships]);
+    }
+
+    public function internshipDashboard(int $token,int $proposel)
+    { 
+        $histories = History::where('proposel_id',$proposel)->get();
+
+        // $proposel = Proposel::where('internship_id', $token)->where('organization_id', auth()->user()->organization->id)->first();
+    
+        // $colors = ["Apply" => "primary", "Applied" => "warning", "Active" => "success", "Blocked" => "secondary", "Rejected" => "danger"];
+        
+        $proposels=Proposel::where('internship_id',$token)->get();
+        return view('OrganisationDashboard.internshipDashboard.workspace')
+        ->with(['proposels'=>$proposels,'histories' => $histories,'internshipId'=>$token,'proposelId'=>$proposel]);
     }
     public function internProposels($token)
     {
-       
-        $proposels=Proposel::where('internship_id',$token)->get();
+
+        $proposels = Proposel::where('internship_id', $token)->get();
 
         return  view('OrganisationDashboard.internProposel')
-        ->with(['proposels'=>$proposels]);
+            ->with(['proposels' => $proposels]);
     }
-    public function internProposel($token,$id)
+    public function internProposel($token, $id)
     {
-       
-        $proposel=Proposel::findOrFail($id);
-// dd($proposel->id,$proposel->reason);
+
+        $proposel = Proposel::findOrFail($id);
+        $colors = ["Apply" => "primary", "Applied" => "warning", "Active" => "success", "Blocked" => "secondary", "Rejected" => "danger"];
+        $color = $colors[$proposel->status];
         return  view('OrganisationDashboard.proposel')
-        ->with(['proposel'=>$proposel]);
+            ->with(['proposel' => $proposel, 'color' => $color]);
     }
     public function interns()
     {
@@ -123,9 +137,9 @@ class OrganizationController extends Controller
         $interns = Intern::where("area_of_interest", "LIKE", "%{$request['query']}%")
             ->orWhere("first_name", "LIKE", "%{$request['query']}%")
             ->get();
-      
 
-     
+
+
         return view('OrganisationDashboard.Intern.searchIntern')->with([
             "interns" => $interns
         ]);

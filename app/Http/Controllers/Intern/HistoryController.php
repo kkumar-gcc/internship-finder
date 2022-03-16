@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreHistoryRequest;
 use App\Http\Requests\UpdateHistoryRequest;
 use App\Models\History;
+use Illuminate\Support\Facades\Redirect;
 
 class HistoryController extends Controller
 {
@@ -17,8 +18,12 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        $histories=History::where('intern_id',auth()->user()->intern->id)->get();
-       
+        $histories=History::where('user_id',auth()->user()->id)->get();
+        // foreach($histories as $history){
+        //     dd($history->user);
+        // }
+        // dd($histories);
+
         return view('InternDashboard.task.create')
         ->with(['histories'=>$histories]);
     }
@@ -42,11 +47,10 @@ class HistoryController extends Controller
     public function store(StoreHistoryRequest $request)
     {
         $formData = $request->all();
-        // dd($formData);
         try {
             $intern =  (new HistoryCommand())->newHistory($formData);
             $request->session()->flash('status', "Task created succesfully");
-            return redirect('/intern/task');
+            return Redirect::back()->with(['message'=>'Operation Successful !']);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage());
         }
@@ -88,7 +92,8 @@ class HistoryController extends Controller
         try {
             $history = (new HistoryCommand())->updateHistory($formData, $id);
             session()->flash('status', 'History updated succesfully');
-            return redirect('/intern/task');
+            return Redirect::back()->with(['message'=>'Operation Successful !']);
+            
         } catch (\Throwable $th) {
             return redirect('/intern/task')->with(['error'=>($th->getMessage())]);
         }
@@ -106,6 +111,7 @@ class HistoryController extends Controller
         $history=History::find($id);
         $history->delete();
 
-        return redirect('/intern/task');
+        return Redirect::back()->with(['message'=>'Operation Successful !']);
+       
     }
 }
